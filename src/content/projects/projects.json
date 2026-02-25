@@ -1,6 +1,6 @@
 [
     {
-        "title": "Ontime Payments Platform",
+        "title": "Ontime Payments",
         "description": "Senior Software Engineer on a payments platform built with serverless architecture on AWS. Working across the full stack with .NET/C# services, NoSQL databases, and modern cloud infrastructure.",
         "techTags": [
             "AWS",
@@ -17,54 +17,68 @@
     },
     {
         "title": "Maxwell Mysteries",
-        "description": "A mystery and puzzle game where players solve clues and unravel stories. Built as an interactive web experience with engaging gameplay mechanics.",
+        "description": "A duo of puzzle games where players solve puzzles to find the clues and unravel the mystery. Built during Covid to bring the joy of escape rooms home. You can purchase the full games from Paradox Parlours and take a look at the demo linked here.",
         "techTags": [
-            "JavaScript",
-            "HTML5",
+            "React",
             "CSS3",
-            "Game Development"
+            "Game"
         ],
-        "repoUrl": "https://github.com/ollie/maxwell-mysteries",
-        "liveUrl": "https://maxwell-mysteries.netlify.app",
+        "repoUrl": "https://github.com/ollieChurch/MaxwellMysteriesDemo",
+        "liveUrl": "https://mysteries-demo.co.uk/",
         "image": "",
         "category": "side"
     },
     {
         "title": "Director's Portfolio",
-        "description": "A sleek portfolio site for a film director, showcasing their body of work with video reels, project breakdowns, and a clean visual layout.",
+        "description": "A sleek portfolio site for an award winning theatre director, with a clean visual layout and admin CMS.",
         "techTags": [
-            "React",
-            "Tailwind CSS",
-            "Vite"
+            "Vue",
+            "Bootstrap",
+            "Portfolio"
         ],
-        "repoUrl": "https://github.com/ollie/directors-portfolio",
-        "liveUrl": "https://directors-portfolio.netlify.app",
+        "repoUrl": "https://github.com/ollieChurch/IndianaDirector",
+        "liveUrl": "https://indianalowncollins.co.uk/",
+        "image": "",
+        "category": "side"
+    },
+    {
+        "title": "Trekking Guide's Website",
+        "description": "A simple portfolio site for a trekking guide in Nepal. Raju wanted to develop an online presence to take his business card digital and provide an easier way for international clients to find his services.",
+        "techTags": [
+            "Next.Js",
+            "Tailwind",
+            "Portfolio"
+        ],
+        "repoUrl": "https://github.com/ollieChurch/RajuTrekking",
+        "liveUrl": "https://www.nepalwithraju.com/",
         "image": "",
         "category": "side"
     },
     {
         "title": "Actor's Portfolio",
-        "description": "A personal portfolio site from Ollie's previous career in acting, featuring headshots, showreel, and performance credits.",
+        "description": "A personal portfolio site for an actor, featuring headshots, showreels, and performance credits.",
         "techTags": [
-            "Vue",
-            "CSS3",
-            "Netlify"
+            "HTML",
+            "Javascript",
+            "CSS",
+            "Portfolio"
         ],
-        "repoUrl": "https://github.com/ollie/actors-portfolio",
-        "liveUrl": "https://actors-portfolio.netlify.app",
+        "repoUrl": "https://github.com/ollieChurch/ActingPortfolioIP",
+        "liveUrl": "https://isobellepippin.co.uk/",
         "image": "",
         "category": "side"
     },
     {
         "title": "Task Glitch",
-        "description": "A task management app with a playful twist. Organise your to-dos with a clean interface and quirky interactions.",
+        "description": "Intelligent task scheduling that scores your backlog and builds you an optimised work session — automatically.",
         "techTags": [
-            "TypeScript",
-            "React",
-            "Node.js"
+            "Vue",
+            "Tailwind",
+            "Firebase",
+            "Productivity"
         ],
-        "repoUrl": "https://github.com/ollie/task-glitch",
-        "liveUrl": "https://task-glitch.netlify.app",
+        "repoUrl": "https://github.com/ollieChurch/taskGlitch",
+        "liveUrl": "https://taskglitch.netlify.app/",
         "image": "",
         "category": "side"
     }
