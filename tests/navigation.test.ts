@@ -11,7 +11,7 @@ import { navLinks } from '../src/data/navLinks';
  * in the navLinks data that drives the Navigation component.
  */
 
-const requiredPaths = ['/', '/about', '/blog', '/projects', '/contact'];
+const requiredPaths = ['/', '/blog', '/work', '/contact'];
 
 describe('Navigation links (Property 10)', () => {
     it('navLinks contains all required paths', () => {

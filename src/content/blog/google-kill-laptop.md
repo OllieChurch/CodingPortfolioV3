@@ -26,10 +26,6 @@ My prediction: Google announces this properly at I/O 2026. The feature is alread
 
 ---
 
-*Human written, AI assisted.*
-
----
-
 ## References
 - [Chrome Unboxed](https://chromeunboxed.com/chromeos-was-quiet-at-google-i-o-2025-heres-likely-why/)
 - [9to5Google](https://9to5google.com/2025/06/23/chromebook-plus-future-android/)

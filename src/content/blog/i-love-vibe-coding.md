@@ -74,10 +74,6 @@ At its highest stakes, there are lives at risk. We cannot gamble with that.
 
 ---
 
-*Human written, AI assisted.*
-
----
-
 ## References
 
 - Greg Brockman's post on agentic software development at OpenAI: [x.com/gdb](https://x.com/gdb/status/2019566641491963946)

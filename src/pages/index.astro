@@ -4,6 +4,7 @@ import Timeline from '../components/Timeline.astro';
 import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 import { getLatestPosts } from '../data/posts';
+import { getReadingTime } from '../data/readingTime';
 
 const posts = await getCollection('blog');
 const latestPosts = getLatestPosts(posts, 2);
@@ -50,7 +51,7 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
     <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
       <div>
         <h1 class="text-4xl font-bold text-[var(--color-cyan)] sm:text-5xl">Ollie Church</h1>
-        <p class="mt-3 text-xl text-gray-300">Senior Software Engineer at Ontime Payments</p>
+        <p class="mt-3 text-xl text-gray-300">Senior Software Engineer @ Ontime Payments</p>
         <p class="mt-2 text-gray-400">Building payments infrastructure with serverless and .NET on AWS.</p>
       </div>
       <div class="flex h-48 w-48 shrink-0 items-center justify-center rounded-xl border-2 border-dashed border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)]">
@@ -325,6 +326,7 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
           description={post.data.description}
           tags={post.data.tags}
           slug={post.id}
+          readingTime={getReadingTime(post.body)}
         />
       ))}
     </div>
@@ -339,9 +341,5 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
       <li>→ <a href="mailto:olliemchurch@gmail.com" class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]">olliemchurch@gmail.com</a></li>
     </ul>
   </section>
-
   <!-- Endnote -->
-  <p class="mx-auto max-w-4xl px-4 pb-8 text-center text-xs text-gray-600">
-    No infinite scroll. You've seen everything.
-  </p>
 </BaseLayout>

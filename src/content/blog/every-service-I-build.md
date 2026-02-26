@@ -45,10 +45,6 @@ Every service will die. That's what makes the system live.
 
 ---
 
-*Human written, AI assisted.*
-
----
-
 ## References
 
 - [^1]: Martin Fowler, [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html). The pattern describes incrementally replacing a legacy system by building new functionality around it, rather than attempting a risky big-bang rewrite.

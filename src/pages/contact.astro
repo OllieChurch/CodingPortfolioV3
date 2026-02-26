@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact // Ollie" description="Get in touch with Ollie.">
+  <section class="mx-auto max-w-3xl px-4 py-12">
+    <h1 class="text-2xl font-bold text-[var(--color-cyan)] sm:text-3xl">contact</h1>
+    <p class="mt-4 text-gray-400">
+      Always happy to chat. Open to interesting conversations, talks, and collaborations.
+    </p>
+
+    <ul class="mt-8 space-y-4 font-mono text-sm">
+      <li class="flex items-center gap-3">
+        <span class="text-gray-500">email</span>
+        <a href="mailto:olliemchurch@gmail.com" class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]">olliemchurch@gmail.com</a>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="text-gray-500">linkedin</span>
+        <a href="https://linkedin.com/in/ollie" target="_blank" rel="noopener noreferrer" class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]">linkedin.com/in/ollie</a>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="text-gray-500">github</span>
+        <a href="https://github.com/ollie" target="_blank" rel="noopener noreferrer" class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]">github.com/ollie</a>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

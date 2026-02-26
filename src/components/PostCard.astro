@@ -5,9 +5,10 @@ interface Props {
   description: string;
   tags: string[];
   slug: string;
+  readingTime?: number;
 }
 
-const { title, date, description, tags, slug } = Astro.props;
+const { title, date, description, tags, slug, readingTime } = Astro.props;
 
 const formattedDate = new Date(date).toLocaleDateString('en-GB', {
   day: 'numeric',
@@ -19,7 +20,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-GB', {
 <a href={`/blog/${slug}`} class="block rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-5 shadow-md shadow-black/20 transition-all hover:border-[var(--color-purple)] hover:shadow-lg hover:shadow-[var(--color-purple)]/10">
   <h3 class="text-lg font-semibold">{title}</h3>
   <time datetime={new Date(date).toISOString()} class="mt-1 block text-sm text-gray-400">
-    {formattedDate}
+    {formattedDate}{readingTime && <span> · {readingTime} min read</span>}
   </time>
   <p class="mt-2 text-sm text-gray-300">{description}</p>
   {tags.length > 0 && (

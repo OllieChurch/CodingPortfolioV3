@@ -3,13 +3,14 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { sortPostsByDateDesc } from '../../data/posts';
+import { getReadingTime } from '../../data/readingTime';
 
 const posts = sortPostsByDateDesc(await getCollection('blog'));
 ---
 
 <BaseLayout title="Blog // Ollie" description="All blog posts by Ollie.">
   <section class="mx-auto max-w-3xl px-4 py-12">
-    <h1 class="mb-6 text-2xl font-bold text-[var(--color-cyan)] sm:text-3xl">Blog</h1>
+    <h1 class="mb-6 text-2xl font-bold text-[var(--color-cyan)] sm:text-3xl">blog</h1>
 
     <!-- Tag filter dropdown -->
     <div class="mb-6 relative">
@@ -41,6 +42,7 @@ const posts = sortPostsByDateDesc(await getCollection('blog'));
             description={post.data.description}
             tags={post.data.tags}
             slug={post.id}
+            readingTime={getReadingTime(post.body)}
           />
         </div>
       ))}

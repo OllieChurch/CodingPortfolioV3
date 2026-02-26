@@ -5,10 +5,11 @@ interface Props {
   techTags: string[];
   repoUrl?: string;
   liveUrl?: string;
+  blogUrl?: string;
   image?: string;
 }
 
-const { title, description, techTags, repoUrl, liveUrl, image } = Astro.props;
+const { title, description, techTags, repoUrl, liveUrl, blogUrl, image } = Astro.props;
 ---
 
 <div class="rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-5 shadow-md shadow-black/20">
@@ -26,7 +27,7 @@ const { title, description, techTags, repoUrl, liveUrl, image } = Astro.props;
       ))}
     </div>
   )}
-  {(repoUrl || liveUrl) && (
+  {(repoUrl || liveUrl || blogUrl) && (
     <div class="mt-4 flex gap-4">
       {repoUrl && (
         <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-cyan)] hover:underline">
@@ -36,6 +37,11 @@ const { title, description, techTags, repoUrl, liveUrl, image } = Astro.props;
       {liveUrl && (
         <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-cyan)] hover:underline">
           Live Site
+        </a>
+      )}
+      {blogUrl && (
+        <a href={blogUrl} class="text-sm text-[var(--color-cyan)] hover:underline">
+          Read about how we build →
         </a>
       )}
     </div>
