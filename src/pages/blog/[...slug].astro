@@ -62,13 +62,21 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-GB', {
     </div>
 
     <script is:inline>
-      document.getElementById('copy-link').addEventListener('click', function() {
-        var label = document.getElementById('copy-label');
-        navigator.clipboard.writeText(window.location.href).then(function() {
-          label.textContent = 'Copied!';
-          setTimeout(function() { label.textContent = 'Copy link'; }, 2000);
-        });
-      });
+      (function() {
+        function initCopyLink() {
+          var btn = document.getElementById('copy-link');
+          if (!btn) return;
+          btn.addEventListener('click', function() {
+            var label = document.getElementById('copy-label');
+            navigator.clipboard.writeText(window.location.href).then(function() {
+              label.textContent = 'Copied!';
+              setTimeout(function() { label.textContent = 'Copy link'; }, 2000);
+            });
+          });
+        }
+        initCopyLink();
+        document.addEventListener('astro:after-swap', initCopyLink);
+      })();
     </script>
   </article>
 </BaseLayout>

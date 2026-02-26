@@ -52,80 +52,85 @@ const posts = sortPostsByDateDesc(await getCollection('blog'));
 
   <script is:inline>
     (function() {
-      var toggle = document.getElementById('tag-toggle');
-      var dropdown = document.getElementById('tag-dropdown');
-      var chevron = document.getElementById('tag-chevron');
-      var label = document.getElementById('tag-label');
-      var activeTags = document.getElementById('active-tags');
-      var options = document.querySelectorAll('.tag-opt');
-      var posts = document.querySelectorAll('#posts-list > div');
-      var selected = [];
+      function initTagFilter() {
+        var toggle = document.getElementById('tag-toggle');
+        if (!toggle) return;
+        var dropdown = document.getElementById('tag-dropdown');
+        var chevron = document.getElementById('tag-chevron');
+        var label = document.getElementById('tag-label');
+        var activeTags = document.getElementById('active-tags');
+        var options = document.querySelectorAll('.tag-opt');
+        var posts = document.querySelectorAll('#posts-list > div');
+        var noPosts = document.getElementById('no-posts');
+        var selected = [];
 
-      toggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        dropdown.classList.toggle('hidden');
-        chevron.style.transform = dropdown.classList.contains('hidden') ? '' : 'rotate(180deg)';
-      });
-
-      document.addEventListener('click', function() {
-        dropdown.classList.add('hidden');
-        chevron.style.transform = '';
-      });
-
-      dropdown.addEventListener('click', function(e) { e.stopPropagation(); });
-
-      var noPosts = document.getElementById('no-posts');
-
-      function filterPosts() {
-        var visible = 0;
-        posts.forEach(function(post) {
-          if (selected.length === 0) {
-            post.style.display = '';
-            visible++;
-          } else {
-            var tags = post.getAttribute('data-tags').split(',');
-            var match = selected.every(function(s) { return tags.indexOf(s) >= 0; });
-            post.style.display = match ? '' : 'none';
-            if (match) visible++;
-          }
+        toggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdown.classList.toggle('hidden');
+          chevron.style.transform = dropdown.classList.contains('hidden') ? '' : 'rotate(180deg)';
         });
-        noPosts.classList.toggle('hidden', visible > 0);
-      }
 
-      function updateUI() {
-        label.textContent = selected.length === 0 ? 'Filter by tag' : selected.length + ' tag' + (selected.length > 1 ? 's' : '') + ' selected';
-        options.forEach(function(opt) {
-          var check = opt.querySelector('.tag-check');
-          if (check) check.classList.toggle('hidden', selected.indexOf(opt.getAttribute('data-tag')) < 0);
+        document.addEventListener('click', function() {
+          dropdown.classList.add('hidden');
+          chevron.style.transform = '';
         });
-        activeTags.innerHTML = '';
-        selected.forEach(function(tag) {
-          var chip = document.createElement('button');
-          chip.className = 'cursor-pointer flex items-center gap-1 rounded-full bg-[var(--color-purple)] px-2.5 py-1 text-xs text-white';
-          chip.innerHTML = tag + ' <span class="opacity-70">✕</span>';
-          chip.addEventListener('click', function() {
-            selected = selected.filter(function(s) { return s !== tag; });
-            updateUI();
-            filterPosts();
+
+        dropdown.addEventListener('click', function(e) { e.stopPropagation(); });
+
+        function filterPosts() {
+          var visible = 0;
+          posts.forEach(function(post) {
+            if (selected.length === 0) {
+              post.style.display = '';
+              visible++;
+            } else {
+              var tags = post.getAttribute('data-tags').split(',');
+              var match = selected.every(function(s) { return tags.indexOf(s) >= 0; });
+              post.style.display = match ? '' : 'none';
+              if (match) visible++;
+            }
           });
-          activeTags.appendChild(chip);
+          noPosts.classList.toggle('hidden', visible > 0);
+        }
+
+        function updateUI() {
+          label.textContent = selected.length === 0 ? 'Filter by tag' : selected.length + ' tag' + (selected.length > 1 ? 's' : '') + ' selected';
+          options.forEach(function(opt) {
+            var check = opt.querySelector('.tag-check');
+            if (check) check.classList.toggle('hidden', selected.indexOf(opt.getAttribute('data-tag')) < 0);
+          });
+          activeTags.innerHTML = '';
+          selected.forEach(function(tag) {
+            var chip = document.createElement('button');
+            chip.className = 'cursor-pointer flex items-center gap-1 rounded-full bg-[var(--color-purple)] px-2.5 py-1 text-xs text-white';
+            chip.innerHTML = tag + ' <span class="opacity-70">✕</span>';
+            chip.addEventListener('click', function() {
+              selected = selected.filter(function(s) { return s !== tag; });
+              updateUI();
+              filterPosts();
+            });
+            activeTags.appendChild(chip);
+          });
+          filterPosts();
+        }
+
+        options.forEach(function(opt) {
+          opt.addEventListener('click', function() {
+            var tag = opt.getAttribute('data-tag');
+            if (tag === 'all') {
+              selected = [];
+            } else {
+              var idx = selected.indexOf(tag);
+              if (idx >= 0) selected.splice(idx, 1);
+              else selected.push(tag);
+            }
+            updateUI();
+          });
         });
-        filterPosts();
       }
 
-      options.forEach(function(opt) {
-        opt.addEventListener('click', function() {
-          var tag = opt.getAttribute('data-tag');
-          if (tag === 'all') {
-            selected = [];
-          } else {
-            var idx = selected.indexOf(tag);
-            if (idx >= 0) selected.splice(idx, 1);
-            else selected.push(tag);
-          }
-          updateUI();
-        });
-      });
+      initTagFilter();
+      document.addEventListener('astro:after-swap', initTagFilter);
     })();
   </script>
 </BaseLayout>
