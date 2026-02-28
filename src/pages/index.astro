@@ -54,9 +54,7 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
         <p class="mt-3 text-xl text-gray-300">Senior Software Engineer @ Ontime Payments</p>
         <p class="mt-2 text-gray-400">Building payments infrastructure with serverless and .NET on AWS.</p>
       </div>
-      <div class="flex h-48 w-48 shrink-0 items-center justify-center rounded-xl border-2 border-dashed border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)]">
-        <p class="text-xs text-gray-500 font-mono">photo coming soon</p>
-      </div>
+      <img src="/ollie-profile.jpg" alt="Ollie Church" class="order-first md:order-last h-48 w-48 shrink-0 rounded-xl object-cover" />
     </div>
   </section>
 
@@ -330,6 +328,7 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
           tags={post.data.tags}
           slug={post.id}
           readingTime={getReadingTime(post.body)}
+          image={post.data.image}
         />
       ))}
     </div>

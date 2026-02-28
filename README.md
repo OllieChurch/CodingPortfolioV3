@@ -1,43 +1,53 @@
-# Astro Starter Kit: Minimal
+# olliechurch.dev
+
+Personal portfolio and blog built with [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.com), and deployed on [Netlify](https://netlify.com).
+
+## What's in here
+
+- Home page with career timeline, tech stack, and a slot machine easter egg
+- Markdown blog with optional header images and Open Graph meta tags
+- Project showcase
+- Contact page
+- Dark theme throughout
+
+## Tech stack
+
+- Astro 5
+- Tailwind CSS 4 (via Vite plugin)
+- Netlify for hosting
+
+## Getting started
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev        # local dev server at localhost:4321
+npm run build      # production build to ./dist/
+npm run preview    # preview the production build locally
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Blog posts
 
-## 🚀 Project Structure
+Blog posts live in `src/content/blog/` as Markdown files. Frontmatter fields:
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```yaml
+title: "Post title"
+date: 2026-01-01
+description: "Short description for cards and OG tags"
+tags: ["tag1", "tag2"]
+published: true
+image: "https://example.com/header.png"  # optional
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Posts with an `image` will show it as a header on the post page and on post cards. It's also used as the Open Graph image when sharing links.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Project structure
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```
+src/
+├── components/     # Astro components (Navigation, PostCard, etc.)
+├── content/        # Blog posts (Markdown) and project data (JSON)
+├── data/           # Helper modules (nav links, post sorting, reading time)
+├── layouts/        # BaseLayout with OG meta tags
+├── pages/          # Routes (home, blog, work, contact, 404)
+└── styles/         # Global CSS
+```

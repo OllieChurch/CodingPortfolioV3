@@ -3,10 +3,11 @@ title: "Every service I build will die"
 date: 2026-03-01
 description: "Small, disposable services and event-driven design mean we can kill and replace anything without the rest of the system noticing."
 tags: ["serverless", "aws", "architecture", "eventdriven"]
-published: false
+image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gpjqi0l0i2rz9oef1snf.png"
+published: true
 ---
 
-And that's exactly the point.
+Every service I buld will die. And that's exactly the point.
 
 I'm a senior software engineer at Ontime Payments, a fintech startup enabling direct-from-salary bill payments. We've deliberately built a modular, event-driven serverless architecture, and every service within it is expected to be replaced eventually. Some won't be. But we build as if they will, and that shapes everything.
 
@@ -29,7 +30,7 @@ We had a monitoring service that started simple but grew into a mess of conditio
 
 That goes against the usual advice (never rewrite, always iterate). But because the original service was small and focused, starting fresh was actually less work than continuing to patch. The scope was manageable.
 
-Both versions ran side by side, similar to the strangler fig pattern you'd use when migrating away from a monolith.[^1] They consumed the same events from EventBridge. The services raising those events didn't need to change anything; they had no idea whether one consumer or two (or ten) were listening. We validated v2 was working, then switched off v1. The rest of the system didn't notice.
+Both versions ran side by side, similar to the strangler fig pattern you'd use when migrating away from a monolith. They consumed the same events from EventBridge. The services raising those events didn't need to change anything; they had no idea whether one consumer or two (or ten) were listening. We validated v2 was working, then switched off v1. The rest of the system didn't notice.
 
 That's not a special story. We've merged modules, split them apart, replaced entire services. An early email-sending service got absorbed into a broader notifications module handling Slack, webhooks, and email together. The old service just switched off. This is the normal way we work, not some heroic migration effort. The benefit isn't a single moment that made it all worthwhile. It's that everything, all the time, is easier.
 
@@ -39,7 +40,7 @@ A lot of developers try to achieve flexibility through prediction, building for 
 
 The flexibility we've found doesn't come from planning ahead. It comes from the architecture itself. Lambda encourages small, focused components. Event-driven design keeps them isolated from each other. Each piece is small enough to understand, focused enough to replace, and isolated enough that replacing it doesn't ripple outward.
 
-The keep-it-simple-stupid philosophy,[^2] but taken seriously at the architecture level. We build for today's requirements, not for every possible future. That frees up mental energy, increases deployment velocity, and means we're not overcomplicating things trying to cope with scenarios that may never arrive. We build for the foreseeable future. When a service no longer fits the requirements, we kill it and replace it with something that does. And because of how we've built, that replacement is easier than it would otherwise be.
+The keep-it-simple-stupid philosophy, but taken seriously at the architecture level. We build for today's requirements, not for every possible future. That frees up mental energy, increases deployment velocity, and means we're not overcomplicating things trying to cope with scenarios that may never arrive. We build for the foreseeable future. When a service no longer fits the requirements, we kill it and replace it with something that does. And because of how we've built, that replacement is easier than it would otherwise be.
 
 Every service will die. That's what makes the system live.
 
@@ -47,7 +48,7 @@ Every service will die. That's what makes the system live.
 
 ## References
 
-- [^1]: Martin Fowler, [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html). The pattern describes incrementally replacing a legacy system by building new functionality around it, rather than attempting a risky big-bang rewrite.
-- [^2]: The [KISS principle](https://en.wikipedia.org/wiki/KISS_principle) ("Keep it simple, stupid") was coined by Kelly Johnson at Lockheed Skunk Works in the 1960s. The idea: systems work best when kept simple, and unnecessary complexity introduces failure points.
+- Martin Fowler, [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html). The pattern describes incrementally replacing a legacy system by building new functionality around it, rather than attempting a risky big-bang rewrite.
+- The [KISS principle](https://en.wikipedia.org/wiki/KISS_principle) ("Keep it simple, stupid") was coined by Kelly Johnson at Lockheed Skunk Works in the 1960s. The idea: systems work best when kept simple, and unnecessary complexity introduces failure points.
 - For more on event-driven serverless architecture with AWS Lambda and EventBridge, see the [AWS documentation on event-driven architectures](https://docs.aws.amazon.com/lambda/latest/dg/concepts-event-driven-architectures.html).
 - [Ontime Payments](https://ontime.co)

@@ -43,6 +43,7 @@ const posts = sortPostsByDateDesc(await getCollection('blog'));
             tags={post.data.tags}
             slug={post.id}
             readingTime={getReadingTime(post.body)}
+            image={post.data.image}
           />
         </div>
       ))}

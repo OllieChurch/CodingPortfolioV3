@@ -6,9 +6,10 @@ interface Props {
   tags: string[];
   slug: string;
   readingTime?: number;
+  image?: string;
 }
 
-const { title, date, description, tags, slug, readingTime } = Astro.props;
+const { title, date, description, tags, slug, readingTime, image } = Astro.props;
 
 const formattedDate = new Date(date).toLocaleDateString('en-GB', {
   day: 'numeric',
@@ -17,7 +18,9 @@ const formattedDate = new Date(date).toLocaleDateString('en-GB', {
 });
 ---
 
-<a href={`/blog/${slug}`} class="block rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-5 shadow-md shadow-black/20 transition-all hover:border-[var(--color-purple)] hover:shadow-lg hover:shadow-[var(--color-purple)]/10">
+<a href={`/blog/${slug}`} class="block overflow-hidden rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] shadow-md shadow-black/20 transition-all hover:border-[var(--color-purple)] hover:shadow-lg hover:shadow-[var(--color-purple)]/10">
+  {image && <img src={image} alt="" class="w-full h-48 object-cover" />}
+  <div class="p-5">
   <h3 class="text-lg font-semibold">{title}</h3>
   <time datetime={new Date(date).toISOString()} class="mt-1 block text-sm text-gray-400">
     {formattedDate}{readingTime && <span> · {readingTime} min read</span>}
@@ -32,4 +35,5 @@ const formattedDate = new Date(date).toLocaleDateString('en-GB', {
       ))}
     </div>
   )}
+  </div>
 </a>

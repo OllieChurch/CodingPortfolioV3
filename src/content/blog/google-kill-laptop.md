@@ -3,6 +3,7 @@ title: "Google is about to kill the laptop"
 date: 2026-02-22
 description: "I've spent days using my Pixel as a desktop computer through Android's hidden desktop mode. This is the future of personal computing."
 tags: ["google", "android", "mobile", "productivity"]
+image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bhkkdmt7bzsxu0ynpogx.png"
 published: true
 ---
 

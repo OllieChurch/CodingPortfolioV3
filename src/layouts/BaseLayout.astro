@@ -6,12 +6,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = "Ollie's developer portfolio and blog" } = Astro.props;
+const { title, description = "Ollie's developer portfolio and blog", image } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://olliechurch.dev');
-const ogImage = new URL('/og-default.png', canonicalUrl.origin).href;
+const ogImage = image ?? new URL('/ollie-profile.jpg', canonicalUrl.origin).href;
 ---
 
 <html lang="en" class="dark">

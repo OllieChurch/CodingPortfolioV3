@@ -3,6 +3,7 @@ title: "I love vibe coding. I don't trust it."
 date: 2026-02-22
 description: "I vibe code constantly. My side project got more features in a month than it had in years. But my job involves people's money, and stakes change everything."
 tags: ["ai", "programming", "productivity", "discuss"]
+image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j2knkpbuz3dvwruls1sc.png"
 published: true
 ---
 
