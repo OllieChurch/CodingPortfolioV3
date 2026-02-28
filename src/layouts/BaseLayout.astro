@@ -11,8 +11,8 @@ interface Props {
 
 const { title, description = "Ollie's developer portfolio and blog", image } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://olliechurch.dev');
-const ogImage = image ?? new URL('/ollie-profile.jpg', canonicalUrl.origin).href;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://olliechurch.co.uk');
+const ogImage = image ?? new URL('/og-default.jpg', canonicalUrl.origin).href;
 ---
 
 <html lang="en" class="dark">
