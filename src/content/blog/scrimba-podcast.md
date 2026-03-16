@@ -3,7 +3,7 @@ title: "I was on the Scrimba Podcast"
 date: 2022-06-28
 description: "I learned to code through Scrimba and made a career switch from acting to software development. They invited me on to talk about how that transition went."
 tags: ["career", "scrimba", "learning", "webdev"]
-image: "https://media.licdn.com/dms/image/v2/D4D3DAQHoqRaWJ5Yn8g/image-scale_191_1128/image-scale_191_1128/0/1736950615607/scrimba_cover?e=1772881200&v=beta&t=m86_We9Pcy8bZl1J2bmJQ6ZFcsCHXCqlTWomjZiRX3Q"
+image: "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fscrimba.com%2Farticles%2Fcontent%2Fimages%2Fsize%2Fw2000%2F2022%2F10%2FThe-best-web-developer-communities-to-join-main.png"
 published: true
 ---
 
