@@ -25,7 +25,7 @@ export function getLatestPosts<T extends PostLike>(posts: T[], limit: number): T
 
 /** Build the URL path for a blog post given its slug. */
 export function getPostUrl(slug: string): string {
-    return `/blog/${slug}`;
+    return `/blog/${slug.toLowerCase()}`;
 }
 
 export interface BlogFrontmatter {

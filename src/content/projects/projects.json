@@ -1,71 +1,26 @@
 [
     {
-        "title": "Ontime Payments",
-        "description": "Senior Software Engineer on a payments platform built with serverless architecture on AWS. Working across the full stack with .NET/C# services, NoSQL databases, and modern cloud infrastructure.",
+        "title": "Pebble",
+        "description": "A white label rewards platform built on AWS. Currently under construction.",
         "techTags": [
+            "Next.js",
             "AWS",
-            "Serverless",
-            ".NET/C#",
-            "NoSQL",
-            "DynamoDB",
-            "Lambda"
+            "Serverless"
         ],
         "repoUrl": "",
         "liveUrl": "",
-        "blogUrl": "/blog/every-service-I-build",
         "image": "",
-        "category": "professional"
+        "category": "side"
     },
     {
         "title": "Maxwell Mysteries",
         "description": "A duo of puzzle games where players solve puzzles to find the clues and unravel the mystery. Built during Covid to bring the joy of escape rooms home. You can purchase the full games from Paradox Parlours and take a look at the demo linked here.",
         "techTags": [
             "React",
-            "CSS3",
-            "Game"
+            "CSS"
         ],
         "repoUrl": "https://github.com/ollieChurch/MaxwellMysteriesDemo",
         "liveUrl": "https://mysteries-demo.co.uk/",
-        "image": "",
-        "category": "side"
-    },
-    {
-        "title": "Director's Portfolio",
-        "description": "A sleek portfolio site for an award winning theatre director, with a clean visual layout and admin CMS.",
-        "techTags": [
-            "Vue",
-            "Bootstrap",
-            "Portfolio"
-        ],
-        "repoUrl": "https://github.com/ollieChurch/IndianaDirector",
-        "liveUrl": "https://indianalowncollins.co.uk/",
-        "image": "",
-        "category": "side"
-    },
-    {
-        "title": "Trekking Guide's Website",
-        "description": "A simple portfolio site for a trekking guide in Nepal. Raju wanted to develop an online presence to take his business card digital and provide an easier way for international clients to find his services.",
-        "techTags": [
-            "Next.Js",
-            "Tailwind",
-            "Portfolio"
-        ],
-        "repoUrl": "https://github.com/ollieChurch/RajuTrekking",
-        "liveUrl": "https://www.nepalwithraju.com/",
-        "image": "",
-        "category": "side"
-    },
-    {
-        "title": "Actor's Portfolio",
-        "description": "A personal portfolio site for an actor, featuring headshots, showreels, and performance credits.",
-        "techTags": [
-            "HTML",
-            "Javascript",
-            "CSS",
-            "Portfolio"
-        ],
-        "repoUrl": "https://github.com/ollieChurch/ActingPortfolioIP",
-        "liveUrl": "https://isobellepippin.co.uk/",
         "image": "",
         "category": "side"
     },
@@ -75,11 +30,49 @@
         "techTags": [
             "Vue",
             "Tailwind",
-            "Firebase",
-            "Productivity"
+            "Firebase"
         ],
         "repoUrl": "https://github.com/ollieChurch/taskGlitch",
         "liveUrl": "https://taskglitch.netlify.app/",
+        "image": "",
+        "category": "side"
+    },
+    {
+        "title": "Director's Portfolio",
+        "description": "Indiana is an award winning theatre director, who wanted a site she could update reguarly as a landing zone for employers and actors.",
+        "techTags": [
+            "Vue",
+            "Bootstrap",
+            "Netlify CMS"
+        ],
+        "repoUrl": "https://github.com/ollieChurch/IndianaDirector",
+        "liveUrl": "https://indianalowncollins.co.uk/",
+        "image": "",
+        "category": "side"
+    },
+    {
+        "title": "Trekking Guide's Website",
+        "description": "Raju wanted to develop an online presence to take his business card digital and provide an easier way for international clients to find his services.",
+        "techTags": [
+            "Next.Js",
+            "Tailwind"
+        ],
+        "repoUrl": "https://github.com/ollieChurch/RajuTrekking",
+        "liveUrl": "https://www.nepalwithraju.com/",
+        "image": "",
+        "category": "side"
+    },
+    {
+        "title": "Actor's Portfolio",
+        "description": "Isobelle is an actor who wanted an easy way to share headshots, showreels, and performance credits with potential employers.",
+        "techTags": [
+            "HTML",
+            "Javascript",
+            "CSS",
+            "Netlify CMS"
+        ],
+        "repoUrl": "https://github.com/ollieChurch/ActingPortfolioIP",
+        "liveUrl": "https://isobellepippin.co.uk/",
         "image": "",
         "category": "side"
     }

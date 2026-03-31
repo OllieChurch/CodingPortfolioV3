@@ -1,5 +1,5 @@
 ---
-title: "The Biggest AI Productivity Hack? Doing What We Should Have Done All Along"
+title: "The biggest AI productivity hack? Doing what we should have done all along"
 date: 2026-03-16
 description: "The practices we're adopting to make AI productive are the same ones that always made humans productive, we just never committed to them."
 tags: ["ai", "productivity", "softwareengineering", "discuss"]

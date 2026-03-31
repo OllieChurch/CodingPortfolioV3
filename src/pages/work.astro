@@ -1,44 +1,248 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import projects from '../content/projects/projects.json';
 
-const professional = projects.filter((p) => p.category === 'professional');
 const side = projects.filter((p) => p.category === 'side');
 ---
 
-<BaseLayout title="Work // Ollie" description="Professional work and side projects by Ollie.">
+<BaseLayout title="Work // Ollie" description="Professional experience and side projects by Ollie Church — senior software engineer specialising in serverless architecture and event-driven systems.">
   <section class="mx-auto max-w-4xl px-4 py-12">
     <h1 class="text-2xl font-bold text-[var(--color-cyan)] sm:text-3xl">work</h1>
 
-    <h2 class="mt-10 font-mono text-lg text-gray-400">day_job</h2>
-    <div class="mt-4 grid gap-6 sm:grid-cols-2">
-      {professional.map((project) => (
-        <ProjectCard
-          title={project.title}
-          description={project.description}
-          techTags={project.techTags}
-          repoUrl={project.repoUrl}
-          liveUrl={project.liveUrl}
-          blogUrl={project.blogUrl}
-          image={project.image}
-        />
-      ))}
-    </div>
+    <!-- Professional Experience -->
+    <h2 class="mt-10 font-mono text-lg text-gray-400">professional_experience</h2>
+    
+    <!-- Ontime Payments -->
+    <article class="mt-6 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] overflow-hidden">
+      <div class="p-6">
+        <div class="flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h3 class="text-xl font-semibold text-white">Ontime Payments</h3>
+            <p class="mt-1 text-sm text-[var(--color-cyan)]">Senior Software Engineer</p>
+          </div>
+          <span class="font-mono text-sm text-[var(--color-purple-light)]">2024–present</span>
+        </div>
+        <p class="mt-3 text-gray-300 text-sm">
+          Built a serverless event-driven payments platform from scratch in a two-person team. End-to-end ownership from stakeholder discovery to production.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {['AWS Lambda', 'DynamoDB', 'EventBridge', '.NET/C#', 'Terraform', 'React', 'TypeScript'].map((tag) => (
+            <span class="rounded bg-[var(--color-purple)]/20 border border-[var(--color-purple)]/30 px-2 py-0.5 text-xs text-[var(--color-purple-light)] font-mono">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
 
-    <h2 class="mt-12 font-mono text-lg text-gray-400">side_projects</h2>
-    <div class="mt-4 grid gap-6 sm:grid-cols-2">
+      <div class="border-t border-[var(--color-bg-dark-card)]">
+        <div class="p-6 pt-5">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Product & Design</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Co-designed product with founders</li>
+                <li>• Translated business requirements → technical specs</li>
+                <li>• Fed back feasibility constraints</li>
+              </ul>
+            </div>
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Architecture</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Event-driven via EventBridge</li>
+                <li>• Loose coupling — kill & replace any service</li>
+                <li>• API-first design, STRIDE threat modelling</li>
+              </ul>
+            </div>
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Infrastructure</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• 100% Terraform — reproducible, auditable</li>
+                <li>• CloudWatch alarms & custom monitoring</li>
+                <li>• Sentinel audit service for failure tracking</li>
+              </ul>
+            </div>
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Related Writing</p>
+              <div class="space-y-2">
+                <a href="/blog/every-service-i-build" class="block text-sm text-[var(--color-cyan)] hover:underline">
+                  → Every service I build will die
+                </a>
+                <a href="/blog/ai-productivity" class="block text-sm text-[var(--color-cyan)] hover:underline">
+                  → The biggest AI productivity hack?
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Salary Finance -->
+    <article class="mt-4 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] overflow-hidden">
+      <div class="p-6">
+        <div class="flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h3 class="text-xl font-semibold text-white">Salary Finance</h3>
+            <p class="mt-1 text-sm text-[var(--color-cyan)]">Junior → Software Engineer</p>
+          </div>
+          <span class="font-mono text-sm text-[var(--color-purple-light)]">2022–2024</span>
+        </div>
+        <p class="mt-3 text-gray-300 text-sm">
+          Joined a high-debt microservices platform. Built alerting systems, bridged knowledge silos, promoted and led delivery of major Loan features.
+        </p>
+      </div>
+
+      <div class="border-t border-[var(--color-bg-dark-card)]">
+        <div class="p-6 pt-5">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Observability</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Designed proactive & reactive alerting</li>
+                <li>• Shifted team from complaint-driven → data-driven</li>
+                <li>• Root cause prioritisation by prevalence</li>
+              </ul>
+            </div>
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Impact</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Alerting data drove root cause fixes that measurably reduced customer complaints</li>
+                <li>• Led delivery of two major features on the Loan product</li>
+                <li>• Promoted to Software Engineer after consistent "exceeds expectations" reviews</li>
+              </ul>
+            </div>
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4 sm:col-span-2">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Knowledge Sharing</p>
+              <ul class="space-y-2 text-sm text-gray-300 sm:columns-2 sm:gap-8">
+                <li>• Documentation for technical & non-technical audiences</li>
+                <li>• Workaround guides for support teams</li>
+                <li>• Cross-team collaboration to bridge silos</li>
+                <li>• System complexity docs for stakeholders</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Side Projects -->
+    <h2 class="mt-16 font-mono text-lg text-gray-400">side_projects</h2>
+    <p class="mt-2 text-sm text-gray-500">Curiosity projects, experiments, and portfolio work for others.</p>
+    <div id="side-projects-grid" class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {side.map((project) => (
-        <ProjectCard
-          title={project.title}
-          description={project.description}
-          techTags={project.techTags}
-          repoUrl={project.repoUrl}
-          liveUrl={project.liveUrl}
-          blogUrl={project.blogUrl}
-          image={project.image}
-        />
+        <div class="flip-card cursor-pointer" style="perspective: 1000px;">
+          <div class="flip-card-inner relative w-full transition-transform duration-500 flipped" style="transform-style: preserve-3d;">
+            <!-- Front -->
+            <div class="flip-card-front rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-4" style="backface-visibility: hidden;">
+              <h3 class="text-base font-semibold text-white">{project.title}</h3>
+              <p class="mt-2 text-xs text-gray-400">{project.description}</p>
+              {(project.repoUrl || project.liveUrl) && (
+                <div class="mt-3 flex gap-3">
+                  {project.repoUrl && (
+                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--color-cyan)] hover:underline" onclick="event.stopPropagation()">
+                      → Code
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--color-cyan)] hover:underline" onclick="event.stopPropagation()">
+                      → Live
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+            <!-- Back -->
+            <div class="flip-card-back absolute inset-0 rounded-lg border border-[var(--color-purple)]/50 bg-[var(--color-bg-dark-surface)] p-4 flex flex-col justify-center items-center" style="backface-visibility: hidden; transform: rotateY(180deg);">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-3">Built with</p>
+              <div class="flex flex-wrap gap-2 justify-center">
+                {project.techTags.map((tag) => (
+                  <span class="rounded bg-[var(--color-purple)]/20 border border-[var(--color-purple)]/30 px-2 py-0.5 text-xs text-[var(--color-purple-light)] font-mono">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   </section>
+
+  <style>
+    .flip-card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+    .flip-card-back {
+      top: 0;
+      height: 100%;
+    }
+  </style>
+
+  <script is:inline>
+    (function() {
+      function initFlipCards() {
+        var grid = document.getElementById('side-projects-grid');
+        if (!grid) return;
+        var cards = grid.querySelectorAll('.flip-card');
+        var hasFlippedOnScroll = false;
+
+        // Equalize card heights
+        function equalizeHeights() {
+          var fronts = grid.querySelectorAll('.flip-card-front');
+          var maxHeight = 0;
+          fronts.forEach(function(front) {
+            front.style.height = 'auto';
+            var h = front.offsetHeight;
+            if (h > maxHeight) maxHeight = h;
+          });
+          cards.forEach(function(card) {
+            card.querySelector('.flip-card-inner').style.height = maxHeight + 'px';
+            card.querySelector('.flip-card-front').style.height = maxHeight + 'px';
+          });
+        }
+        equalizeHeights();
+        window.addEventListener('resize', equalizeHeights);
+
+        // Flip cards to front when grid comes into view
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && !hasFlippedOnScroll) {
+              hasFlippedOnScroll = true;
+              cards.forEach(function(card, i) {
+                setTimeout(function() {
+                  card.querySelector('.flip-card-inner').classList.remove('flipped');
+                }, i * 100);
+              });
+            }
+          });
+        }, { threshold: 0.2 });
+
+        observer.observe(grid);
+
+        // Detect touch device
+        var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // Hover for desktop, click for touch
+        cards.forEach(function(card) {
+          var inner = card.querySelector('.flip-card-inner');
+          
+          if (isTouch) {
+            card.addEventListener('click', function(e) {
+              if (e.target.tagName === 'A') return;
+              inner.classList.toggle('flipped');
+            });
+          } else {
+            card.addEventListener('mouseenter', function() {
+              inner.classList.add('flipped');
+            });
+            card.addEventListener('mouseleave', function() {
+              inner.classList.remove('flipped');
+            });
+          }
+        });
+      }
+      initFlipCards();
+      document.addEventListener('astro:after-swap', initFlipCards);
+    })();
+  </script>
 </BaseLayout>
