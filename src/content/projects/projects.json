@@ -1,7 +1,7 @@
 [
     {
         "title": "Pebble",
-        "description": "A white label rewards platform built on AWS. Currently under construction.",
+        "description": "White label rewards platform — assign points, redeem vouchers, bolt it onto any product. Orgs define their own rewards, no dev work required.",
         "techTags": [
             "Next.js",
             "AWS",
@@ -9,6 +9,7 @@
         ],
         "repoUrl": "",
         "liveUrl": "",
+        "status": "Under construction",
         "image": "",
         "category": "side"
     },

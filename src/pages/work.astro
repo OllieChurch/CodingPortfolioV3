@@ -90,7 +90,15 @@ const side = projects.filter((p) => p.category === 'side');
         <p class="mt-3 text-gray-300 text-sm">
           Joined a high-debt microservices platform. Built alerting systems, bridged knowledge silos, promoted and led delivery of major Loan features.
         </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {['Microservices', 'MySQL RDS', '.NET/C#', 'Vue', 'TypeScript', 'AWS'].map((tag) => (
+            <span class="rounded bg-[var(--color-purple)]/20 border border-[var(--color-purple)]/30 px-2 py-0.5 text-xs text-[var(--color-purple-light)] font-mono">
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
+      
 
       <div class="border-t border-[var(--color-bg-dark-card)]">
         <div class="p-6 pt-5">
@@ -132,26 +140,12 @@ const side = projects.filter((p) => p.category === 'side');
       {side.map((project) => (
         <div class="flip-card cursor-pointer" style="perspective: 1000px;">
           <div class="flip-card-inner relative w-full transition-transform duration-500 flipped" style="transform-style: preserve-3d;">
-            <!-- Front -->
+            <!-- Front: title + description -->
             <div class="flip-card-front rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-4" style="backface-visibility: hidden;">
               <h3 class="text-base font-semibold text-white">{project.title}</h3>
               <p class="mt-2 text-xs text-gray-400">{project.description}</p>
-              {(project.repoUrl || project.liveUrl) && (
-                <div class="mt-3 flex gap-3">
-                  {project.repoUrl && (
-                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--color-cyan)] hover:underline" onclick="event.stopPropagation()">
-                      → Code
-                    </a>
-                  )}
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--color-cyan)] hover:underline" onclick="event.stopPropagation()">
-                      → Live
-                    </a>
-                  )}
-                </div>
-              )}
             </div>
-            <!-- Back -->
+            <!-- Back: tech tags + links -->
             <div class="flip-card-back absolute inset-0 rounded-lg border border-[var(--color-purple)]/50 bg-[var(--color-bg-dark-surface)] p-4 flex flex-col justify-center items-center" style="backface-visibility: hidden; transform: rotateY(180deg);">
               <p class="text-xs text-gray-500 uppercase tracking-wide mb-3">Built with</p>
               <div class="flex flex-wrap gap-2 justify-center">
@@ -161,6 +155,22 @@ const side = projects.filter((p) => p.category === 'side');
                   </span>
                 ))}
               </div>
+              {(project.repoUrl || project.liveUrl) ? (
+                <div class="mt-4 flex gap-4">
+                  {project.repoUrl && (
+                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--color-cyan)] hover:underline">
+                      → Code
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-[var(--color-cyan)] hover:underline">
+                      → Live
+                    </a>
+                  )}
+                </div>
+              ) : project.status && (
+                <p class="mt-4 text-xs text-gray-500 italic">{project.status}</p>
+              )}
             </div>
           </div>
         </div>
