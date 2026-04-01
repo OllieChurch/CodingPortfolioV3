@@ -2,7 +2,7 @@
 title: "The AI calculation everyone is making"
 date: 2026-03-01
 description: "A response to the 'Global Intelligence Crisis', from someone who wants to dismiss it... but can't."
-tags: ["ai", "career", "softwarengineering", "discuss"]
+tags: ["ai", "career", "softwareengineering", "discuss"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/i7l6s1v9neicwhgfi7rh.png"
 published: true
 ---
