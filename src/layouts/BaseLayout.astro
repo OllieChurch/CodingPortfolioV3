@@ -9,7 +9,7 @@ interface Props {
   image?: string;
 }
 
-const { title, description = "Lead Software Engineer building payments infrastructure with serverless and .NET on AWS. Portfolio, blog, and career journey.", image } = Astro.props;
+const { title, description = "Founding Software Engineer building payments infrastructure with serverless and .NET on AWS. Portfolio, blog, and career journey.", image } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://olliechurch.co.uk');
 const ogImage = image ?? new URL('/og-default.jpg', canonicalUrl.origin).href;
