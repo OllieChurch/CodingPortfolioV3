@@ -10,6 +10,10 @@ const blog = defineCollection({
         tags: z.array(z.string()),
         published: z.boolean().default(true),
         image: z.string().optional(),
+        // Optional link to the matching Dev.to article. When set, the post
+        // page pulls that article's comments and shows a "join in on Dev.to"
+        // link. Posts without it simply have no comments section.
+        devtoUrl: z.string().url().optional(),
     }),
 });
 

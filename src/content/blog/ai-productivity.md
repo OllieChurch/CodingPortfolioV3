@@ -5,6 +5,7 @@ description: "The practices we're adopting to make AI productive are the same on
 tags: ["ai", "productivity", "process", "discuss"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tt2ulgmlcwqgic0cezci.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/the-biggest-ai-productivity-hack-doing-what-we-should-have-done-all-along-b9i"
 ---
 
 Everyone's optimising for AI right now. Writing clearer requirements. Documenting features properly. Structuring code cleanly. Maintaining READMEs. Breaking work into small, well-defined tasks. Keeping track of technical debt.

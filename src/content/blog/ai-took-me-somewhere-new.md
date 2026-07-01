@@ -5,6 +5,7 @@ description: "A reply to Matt Whetton. I set out to tell him AI hadn't moved the
 tags: ["ai", "process", "discuss", "matt_whetton"]
 image: "https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/wflzxreo4gidhpleu4yh.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/ai-took-me-somewhere-new-and-proved-me-wrong-169i"
 ---
 
 [Matt Whetton recently wrote a piece](https://www.sidewrks.com/blog/the-line-moved-into-my-own-work) about the wall between technical and non-technical builders. On one side, the people who build from understanding and can maintain what they ship. On the other, the people who can assemble something but couldn't keep it running on their own. AI was meant to be the thing that finally let the second group across.

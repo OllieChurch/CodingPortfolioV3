@@ -1,47 +1,62 @@
 ---
-import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getReadingTime } from '../../data/readingTime';
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Comments from "../../components/Comments.astro";
+import { getReadingTime } from "../../data/readingTime";
 
-export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id.toLowerCase() },
-    props: { post },
-  }));
+// Rendered on demand so each visit shows the post's current Dev.to comments.
+// Every other route stays statically prerendered.
+export const prerender = false;
+
+const { slug } = Astro.params;
+const posts = await getCollection("blog");
+const post = posts.find((p) => p.id.toLowerCase() === slug?.toLowerCase());
+
+if (!post) {
+  return Astro.redirect("/404");
 }
 
-const { post } = Astro.props;
 const { Content } = await render(post);
 const readingTime = getReadingTime(post.body);
 
-const formattedDate = new Date(post.data.date).toLocaleDateString('en-GB', {
-  day: 'numeric',
-  month: 'short',
-  year: 'numeric',
+const formattedDate = new Date(post.data.date).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
 });
 ---
 
-<BaseLayout title={`${post.data.title} // Ollie`} description={post.data.description} image={post.data.image}>
+<BaseLayout
+  title={`${post.data.title} // Ollie`}
+  description={post.data.description}
+  image={post.data.image}
+>
   <article class="mx-auto max-w-4xl px-4 py-12">
-    {post.data.image && (
-      <img src={post.data.image} alt="" class="mb-8 w-full rounded-xl" />
-    )}
+    {
+      post.data.image && (
+        <img src={post.data.image} alt="" class="mb-8 w-full rounded-xl" />
+      )
+    }
     <header class="mb-8">
       <h1 class="text-2xl font-bold sm:text-3xl">{post.data.title}</h1>
-      <time datetime={new Date(post.data.date).toISOString()} class="mt-2 block text-sm text-gray-400">
+      <time
+        datetime={new Date(post.data.date).toISOString()}
+        class="mt-2 block text-sm text-gray-400"
+      >
         {formattedDate} · {readingTime} min read
       </time>
       <p class="mt-3 text-gray-300">{post.data.description}</p>
-      {post.data.tags.length > 0 && (
-        <div class="mt-4 flex flex-wrap gap-2">
-          {post.data.tags.map((tag) => (
-            <span class="rounded-full bg-[var(--color-bg-dark-card)] px-2.5 py-0.5 text-xs text-[var(--color-cyan)]">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
+      {
+        post.data.tags.length > 0 && (
+          <div class="mt-4 flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <span class="rounded-full bg-[var(--color-bg-dark-card)] px-2.5 py-0.5 text-xs text-[var(--color-cyan)]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
     </header>
 
     <div class="prose prose-invert max-w-none">
@@ -52,33 +67,51 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-GB', {
       Human written, AI assisted.
     </p>
 
-    <div class="mt-6 flex items-center gap-3 border-t border-[var(--color-bg-dark-card)] pt-6">
+    <div
+      class="mt-6 flex items-center gap-3 border-t border-[var(--color-bg-dark-card)] pt-6"
+    >
       <button
         id="copy-link"
         class="cursor-pointer flex items-center gap-1.5 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] px-3 py-2 text-sm text-gray-400 transition-colors hover:border-[var(--color-purple)] hover:text-gray-200"
       >
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        <svg
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+          ></path>
         </svg>
         <span id="copy-label">Copy link</span>
       </button>
     </div>
 
+    <Comments devtoUrl={post.data.devtoUrl} />
+
     <script is:inline>
-      (function() {
+      (function () {
         function initCopyLink() {
-          var btn = document.getElementById('copy-link');
+          var btn = document.getElementById("copy-link");
           if (!btn) return;
-          btn.addEventListener('click', function() {
-            var label = document.getElementById('copy-label');
-            navigator.clipboard.writeText(window.location.href).then(function() {
-              label.textContent = 'Copied!';
-              setTimeout(function() { label.textContent = 'Copy link'; }, 2000);
-            });
+          btn.addEventListener("click", function () {
+            var label = document.getElementById("copy-label");
+            navigator.clipboard
+              .writeText(window.location.href)
+              .then(function () {
+                label.textContent = "Copied!";
+                setTimeout(function () {
+                  label.textContent = "Copy link";
+                }, 2000);
+              });
           });
         }
         initCopyLink();
-        document.addEventListener('astro:after-swap', initCopyLink);
+        document.addEventListener("astro:after-swap", initCopyLink);
       })();
     </script>
   </article>

@@ -5,6 +5,7 @@ description: "A response to the 'Global Intelligence Crisis', from someone who w
 tags: ["ai", "career", "discuss"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/i7l6s1v9neicwhgfi7rh.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/the-ai-calculation-everyones-making-3p5h"
 ---
 
 If you've been anywhere near AI discourse this last week, you've probably seen the Citrini Research piece, "The 2028 Global Intelligence Crisis." If you haven't: it's a speculative memo written from June 2028, describing how AI-driven productivity gains trigger mass white-collar unemployment, collapsing consumer spending, and cascading financial crisis. S&P down 38%, unemployment above 10%. [You can read the full thing here](https://www.citriniresearch.com/p/2028gic).

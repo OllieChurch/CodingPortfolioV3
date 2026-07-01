@@ -1,112 +1,193 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { sortPostsByDateDesc } from '../../data/posts';
-import { getReadingTime } from '../../data/readingTime';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { sortPostsByDateDesc } from "../../data/posts";
+import { getReadingTime } from "../../data/readingTime";
+import { getDevtoCommentCounts } from "../../data/devtoComments";
 
-const posts = sortPostsByDateDesc(await getCollection('blog'));
+const posts = sortPostsByDateDesc(await getCollection("blog"));
+
+// Comment counts are fetched at build time (see getDevtoCommentCounts), so
+// they refresh on each deploy and don't slow down page views.
+const devtoUrls = posts
+  .map((p) => p.data.devtoUrl)
+  .filter((u): u is string => typeof u === "string");
+const commentCounts = await getDevtoCommentCounts(devtoUrls);
 ---
 
 <BaseLayout title="Blog // Ollie" description="All blog posts by Ollie.">
   <section class="mx-auto max-w-4xl px-4 py-12">
-    <h1 class="mb-6 text-2xl font-bold text-[var(--color-cyan)] sm:text-3xl">blog</h1>
+    <h1 class="mb-6 text-2xl font-bold text-[var(--color-cyan)] sm:text-3xl">
+      blog
+    </h1>
 
     <!-- Tag filter dropdown -->
     <div class="mb-6 relative">
-      <button id="tag-toggle" class="cursor-pointer flex items-center gap-2 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] px-4 py-2.5 text-sm text-gray-300 transition-colors hover:border-[var(--color-purple)]">
-        <svg class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>
+      <button
+        id="tag-toggle"
+        class="cursor-pointer flex items-center gap-2 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] px-4 py-2.5 text-sm text-gray-300 transition-colors hover:border-[var(--color-purple)]"
+      >
+        <svg
+          class="h-4 w-4 text-gray-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+          ></path></svg
+        >
         <span id="tag-label">Filter by tag</span>
-        <svg class="h-3 w-3 ml-1 text-gray-500 transition-transform" id="tag-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+        <svg
+          class="h-3 w-3 ml-1 text-gray-500 transition-transform"
+          id="tag-chevron"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19 9l-7 7-7-7"></path></svg
+        >
       </button>
       <!-- Active tags display -->
-      <div id="active-tags" class="mt-2 flex flex-wrap gap-1.5 empty:hidden"></div>
+      <div id="active-tags" class="mt-2 flex flex-wrap gap-1.5 empty:hidden">
+      </div>
       <!-- Dropdown -->
-      <div id="tag-dropdown" class="hidden absolute z-20 mt-2 w-64 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-2 shadow-lg shadow-black/30">
-        <button data-tag="all" class="tag-opt w-full text-left rounded px-3 py-2 text-sm text-gray-300 hover:bg-[var(--color-bg-dark-card)] cursor-pointer">Show all</button>
-        {[...new Set(posts.flatMap((p) => p.data.tags))].sort().map((tag) => (
-          <button data-tag={tag} class="tag-opt w-full text-left rounded px-3 py-2 text-sm text-gray-300 hover:bg-[var(--color-bg-dark-card)] cursor-pointer flex items-center justify-between">
-            <span>{tag}</span>
-            <span class="tag-check hidden text-[var(--color-cyan)] text-xs">✓</span>
-          </button>
-        ))}
+      <div
+        id="tag-dropdown"
+        class="hidden absolute z-20 mt-2 w-64 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-2 shadow-lg shadow-black/30"
+      >
+        <button
+          data-tag="all"
+          class="tag-opt w-full text-left rounded px-3 py-2 text-sm text-gray-300 hover:bg-[var(--color-bg-dark-card)] cursor-pointer"
+          >Show all</button
+        >
+        {
+          [...new Set(posts.flatMap((p) => p.data.tags))].sort().map((tag) => (
+            <button
+              data-tag={tag}
+              class="tag-opt w-full text-left rounded px-3 py-2 text-sm text-gray-300 hover:bg-[var(--color-bg-dark-card)] cursor-pointer flex items-center justify-between"
+            >
+              <span>{tag}</span>
+              <span class="tag-check hidden text-[var(--color-cyan)] text-xs">
+                ✓
+              </span>
+            </button>
+          ))
+        }
       </div>
     </div>
 
     <div id="posts-list" class="flex flex-col gap-4">
-      {posts.map((post) => (
-        <div data-tags={post.data.tags.join(',')}>
-          <PostCard
-            title={post.data.title}
-            date={post.data.date}
-            description={post.data.description}
-            tags={post.data.tags}
-            slug={post.id}
-            readingTime={getReadingTime(post.body)}
-            image={post.data.image}
-          />
-        </div>
-      ))}
+      {
+        posts.map((post) => (
+          <div data-tags={post.data.tags.join(",")}>
+            <PostCard
+              title={post.data.title}
+              date={post.data.date}
+              description={post.data.description}
+              tags={post.data.tags}
+              slug={post.id}
+              readingTime={getReadingTime(post.body)}
+              image={post.data.image}
+              commentCount={
+                post.data.devtoUrl
+                  ? commentCounts.get(post.data.devtoUrl)
+                  : undefined
+              }
+            />
+          </div>
+        ))
+      }
     </div>
-    <p id="no-posts" class="hidden py-12 text-center text-sm text-gray-500 italic">Nothing here but us geese. 🪿</p>
+    <p
+      id="no-posts"
+      class="hidden py-12 text-center text-sm text-gray-500 italic"
+    >
+      Nothing here but us geese. 🪿
+    </p>
   </section>
 
   <script is:inline>
-    (function() {
+    (function () {
       function initTagFilter() {
-        var toggle = document.getElementById('tag-toggle');
+        var toggle = document.getElementById("tag-toggle");
         if (!toggle) return;
-        var dropdown = document.getElementById('tag-dropdown');
-        var chevron = document.getElementById('tag-chevron');
-        var label = document.getElementById('tag-label');
-        var activeTags = document.getElementById('active-tags');
-        var options = document.querySelectorAll('.tag-opt');
-        var posts = document.querySelectorAll('#posts-list > div');
-        var noPosts = document.getElementById('no-posts');
+        var dropdown = document.getElementById("tag-dropdown");
+        var chevron = document.getElementById("tag-chevron");
+        var label = document.getElementById("tag-label");
+        var activeTags = document.getElementById("active-tags");
+        var options = document.querySelectorAll(".tag-opt");
+        var posts = document.querySelectorAll("#posts-list > div");
+        var noPosts = document.getElementById("no-posts");
         var selected = [];
 
-        toggle.addEventListener('click', function(e) {
+        toggle.addEventListener("click", function (e) {
           e.stopPropagation();
-          dropdown.classList.toggle('hidden');
-          chevron.style.transform = dropdown.classList.contains('hidden') ? '' : 'rotate(180deg)';
+          dropdown.classList.toggle("hidden");
+          chevron.style.transform = dropdown.classList.contains("hidden")
+            ? ""
+            : "rotate(180deg)";
         });
 
-        document.addEventListener('click', function() {
-          dropdown.classList.add('hidden');
-          chevron.style.transform = '';
+        document.addEventListener("click", function () {
+          dropdown.classList.add("hidden");
+          chevron.style.transform = "";
         });
 
-        dropdown.addEventListener('click', function(e) { e.stopPropagation(); });
+        dropdown.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
 
         function filterPosts() {
           var visible = 0;
-          posts.forEach(function(post) {
+          posts.forEach(function (post) {
             if (selected.length === 0) {
-              post.style.display = '';
+              post.style.display = "";
               visible++;
             } else {
-              var tags = post.getAttribute('data-tags').split(',');
-              var match = selected.every(function(s) { return tags.indexOf(s) >= 0; });
-              post.style.display = match ? '' : 'none';
+              var tags = post.getAttribute("data-tags").split(",");
+              var match = selected.every(function (s) {
+                return tags.indexOf(s) >= 0;
+              });
+              post.style.display = match ? "" : "none";
               if (match) visible++;
             }
           });
-          noPosts.classList.toggle('hidden', visible > 0);
+          noPosts.classList.toggle("hidden", visible > 0);
         }
 
         function updateUI() {
-          label.textContent = selected.length === 0 ? 'Filter by tag' : selected.length + ' tag' + (selected.length > 1 ? 's' : '') + ' selected';
-          options.forEach(function(opt) {
-            var check = opt.querySelector('.tag-check');
-            if (check) check.classList.toggle('hidden', selected.indexOf(opt.getAttribute('data-tag')) < 0);
+          label.textContent =
+            selected.length === 0
+              ? "Filter by tag"
+              : selected.length +
+                " tag" +
+                (selected.length > 1 ? "s" : "") +
+                " selected";
+          options.forEach(function (opt) {
+            var check = opt.querySelector(".tag-check");
+            if (check)
+              check.classList.toggle(
+                "hidden",
+                selected.indexOf(opt.getAttribute("data-tag")) < 0,
+              );
           });
-          activeTags.innerHTML = '';
-          selected.forEach(function(tag) {
-            var chip = document.createElement('button');
-            chip.className = 'cursor-pointer flex items-center gap-1 rounded-full bg-[var(--color-purple)] px-2.5 py-1 text-xs text-white';
+          activeTags.innerHTML = "";
+          selected.forEach(function (tag) {
+            var chip = document.createElement("button");
+            chip.className =
+              "cursor-pointer flex items-center gap-1 rounded-full bg-[var(--color-purple)] px-2.5 py-1 text-xs text-white";
             chip.innerHTML = tag + ' <span class="opacity-70">✕</span>';
-            chip.addEventListener('click', function() {
-              selected = selected.filter(function(s) { return s !== tag; });
+            chip.addEventListener("click", function () {
+              selected = selected.filter(function (s) {
+                return s !== tag;
+              });
               updateUI();
               filterPosts();
             });
@@ -115,10 +196,10 @@ const posts = sortPostsByDateDesc(await getCollection('blog'));
           filterPosts();
         }
 
-        options.forEach(function(opt) {
-          opt.addEventListener('click', function() {
-            var tag = opt.getAttribute('data-tag');
-            if (tag === 'all') {
+        options.forEach(function (opt) {
+          opt.addEventListener("click", function () {
+            var tag = opt.getAttribute("data-tag");
+            if (tag === "all") {
               selected = [];
             } else {
               var idx = selected.indexOf(tag);
@@ -131,7 +212,7 @@ const posts = sortPostsByDateDesc(await getCollection('blog'));
       }
 
       initTagFilter();
-      document.addEventListener('astro:after-swap', initTagFilter);
+      document.addEventListener("astro:after-swap", initTagFilter);
     })();
   </script>
 </BaseLayout>

@@ -1,0 +1,63 @@
+---
+// Comments section for a blog post. Pulls the matching Dev.to article's
+// comments at request time and always offers a link to join the conversation.
+// Renders nothing when the post has no `devtoUrl`.
+import { getDevtoComments } from "../data/devtoComments";
+import Comment from "./Comment.astro";
+
+interface Props {
+  devtoUrl?: string;
+}
+
+const { devtoUrl } = Astro.props;
+const data = devtoUrl ? await getDevtoComments(devtoUrl) : null;
+// Fall back to the raw URL if the fetch failed, so the CTA still works.
+const articleUrl = data?.articleUrl ?? devtoUrl;
+---
+
+{
+  devtoUrl && (
+    <section class="mt-12 border-t border-[var(--color-bg-dark-card)] pt-8">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h2 class="text-xl font-bold">
+          {data && data.count > 0 ? `Comments (${data.count})` : "Comments"}
+        </h2>
+        <a
+          href={articleUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-purple)] px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-purple-light)]"
+        >
+          Join the conversation on Dev.to
+          <svg
+            class="h-3.5 w-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14 5h5v5m0-5L10 14M9 5H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-4"
+            />
+          </svg>
+        </a>
+      </div>
+
+      {data && data.count > 0 ? (
+        <div class="mt-8 space-y-8">
+          {data.comments.map((comment) => (
+            <Comment comment={comment} />
+          ))}
+        </div>
+      ) : (
+        <p class="mt-4 text-sm text-gray-400">
+          {data
+            ? "No comments yet. Be the first to share your thoughts over on Dev.to."
+            : "Comments live over on Dev.to. Head over to read and join in."}
+        </p>
+      )}
+    </section>
+  )
+}

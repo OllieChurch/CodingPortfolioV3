@@ -5,6 +5,7 @@ description: "I vibe code constantly. My side project got more features in a mon
 tags: ["ai", "programming", "productivity", "discuss"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j2knkpbuz3dvwruls1sc.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/i-love-vibe-coding-i-dont-trust-it-312n"
 ---
 
 Greg Brockman says engineers should reach for an agent before they reach for an editor. I've been testing that for months. The answer is: it depends - and knowing when is everything.

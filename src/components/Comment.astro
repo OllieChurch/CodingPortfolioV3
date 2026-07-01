@@ -1,0 +1,64 @@
+---
+// Renders a single Dev.to comment and, recursively, its replies.
+import type { DevtoComment } from '../data/devtoComments';
+import Comment from './Comment.astro';
+
+interface Props {
+  comment: DevtoComment;
+}
+
+const { comment } = Astro.props;
+
+const date = comment.createdAt
+  ? new Date(comment.createdAt).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })
+  : '';
+
+const profileUrl = comment.authorUsername
+  ? `https://dev.to/${comment.authorUsername}`
+  : undefined;
+---
+
+<article>
+  <div class="flex items-center gap-2.5">
+    {comment.avatar && (
+      <img
+        src={comment.avatar}
+        alt=""
+        width="32"
+        height="32"
+        loading="lazy"
+        class="h-8 w-8 shrink-0 rounded-full"
+      />
+    )}
+    <div class="flex flex-wrap items-baseline gap-x-2">
+      {profileUrl ? (
+        <a
+          href={profileUrl}
+          target="_blank"
+          rel="noopener"
+          class="text-sm font-medium text-gray-200 hover:text-[var(--color-cyan)]"
+        >
+          {comment.author}
+        </a>
+      ) : (
+        <span class="text-sm font-medium text-gray-200">{comment.author}</span>
+      )}
+      {date && <time class="text-xs text-gray-500">{date}</time>}
+    </div>
+  </div>
+
+  <!-- body_html comes pre-sanitised from the Dev.to (Forem) API -->
+  <div class="prose prose-invert prose-sm mt-2 max-w-none" set:html={comment.bodyHtml} />
+
+  {comment.replies.length > 0 && (
+    <div class="mt-4 space-y-4 border-l border-[var(--color-bg-dark-card)] pl-4">
+      {comment.replies.map((reply) => (
+        <Comment comment={reply} />
+      ))}
+    </div>
+  )}
+</article>

@@ -5,6 +5,7 @@ description: "Nearly 1,000 faults. No monitoring. No useful documentation. Under
 tags: ["monitroring", "microservices", "architecture", "devops"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gf8fgcc77dnjydsbl4dr.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/dont-understand-the-system-start-fixing-it-anyway-3ka2"
 ---
 
 My first professional engineering job dropped me into a sizeable microservices platform carrying significant technical debt. Nearly 1,000 user applications were stuck in a catch-all "fault" status. The faults were caused by bugs across different services, but the status didn't distinguish between them. You couldn't tell whether you were looking at a one-off edge case or a symptom of something affecting hundreds of users. From the outside, the system was impenetrable.

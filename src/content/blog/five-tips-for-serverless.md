@@ -5,6 +5,7 @@ description: "Five low-friction habits to put in place when you're starting an e
 tags: ["serverless", "aws", "architecture", "eventdriven"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0fybyn05avlvaz5hjcem.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/five-quick-wins-for-building-serverless-on-aws-1adh"
 ---
 
 A few Lambdas hooked up to an EventBridge bus will get you a long way before they ask anything of you. The trouble is, by the time you're feeling the rough edges, some of the patterns that would have helped most are expensive to retrofit.

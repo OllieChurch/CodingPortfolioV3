@@ -5,6 +5,7 @@ description: "I've spent days using my Pixel as a desktop computer through Andro
 tags: ["google", "android", "mobile", "productivity"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bhkkdmt7bzsxu0ynpogx.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/google-is-about-to-kill-the-laptop-8nl"
 ---
 
 Here's a prediction: Google is going to kill the laptop. And the feature that does it is already available on Pixel 8 and later devices, buried in developer settings.

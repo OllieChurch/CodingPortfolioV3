@@ -5,6 +5,7 @@ description: "Small, disposable services and event-driven design mean we can kil
 tags: ["serverless", "aws", "architecture", "eventdriven"]
 image: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gpjqi0l0i2rz9oef1snf.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/every-service-i-build-will-die-3i8g"
 ---
 
 Every service I buld will die. And that's exactly the point.

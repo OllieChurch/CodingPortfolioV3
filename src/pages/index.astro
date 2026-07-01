@@ -1,60 +1,92 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Timeline from '../components/Timeline.astro';
-import PostCard from '../components/PostCard.astro';
-import { getCollection } from 'astro:content';
-import { getLatestPosts } from '../data/posts';
-import { getReadingTime } from '../data/readingTime';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Timeline from "../components/Timeline.astro";
+import PostCard from "../components/PostCard.astro";
+import { getCollection } from "astro:content";
+import { getLatestPosts } from "../data/posts";
+import { getReadingTime } from "../data/readingTime";
+import { getDevtoCommentCounts } from "../data/devtoComments";
 
-const posts = await getCollection('blog');
+const posts = await getCollection("blog");
 const latestPosts = getLatestPosts(posts, 2);
+
+// Build-time Dev.to comment counts for the latest-post cards (refreshes on deploy).
+const commentCounts = await getDevtoCommentCounts(
+  latestPosts
+    .map((p) => p.data.devtoUrl)
+    .filter((u): u is string => typeof u === "string"),
+);
 
 const timelineEntries = [
   {
-    year: '2016',
-    title: 'Graduated from Guildford School of Acting',
-    description: 'Three years of drama school, then a few years of acting, odd jobs, and figuring out what came next.',
+    year: "2016",
+    title: "Graduated from Guildford School of Acting",
+    description:
+      "Three years of drama school, then a few years of acting, odd jobs, and figuring out what came next.",
   },
   {
-    year: '2018',
-    title: 'Escape Room Manager',
-    description: 'Started managing an escape room. Built electronics, designed puzzles, and discovered I really liked solving problems.',
+    year: "2018",
+    title: "Escape Room Manager",
+    description:
+      "Started managing an escape room. Built electronics, designed puzzles, and discovered I really liked solving problems.",
   },
   {
-    year: '2020',
-    title: 'Furloughed. Started Learning Web Development',
-    description: 'The pandemic hit, and suddenly there was time. Picked up web development full-time and never looked back.',
+    year: "2020",
+    title: "Furloughed. Started Learning Web Development",
+    description:
+      "The pandemic hit, and suddenly there was time. Picked up web development full-time and never looked back.",
   },
   {
-    year: '2022',
-    title: 'Career Transition. Junior Developer, Salary Finance',
-    description: 'Made the leap into software development professionally.',
+    year: "2022",
+    title: "Career Transition. Junior Developer, Salary Finance",
+    description: "Made the leap into software development professionally.",
   },
   {
-    year: '2023',
-    title: 'Promoted to Software Engineer',
-    description: 'Taking on more ownership across the stack.',
+    year: "2023",
+    title: "Promoted to Software Engineer",
+    description: "Taking on more ownership across the stack.",
   },
   {
-    year: '2024',
-    title: 'Founding Software Engineer, Ontime Payments',
-    description: 'Building payments infrastructure with serverless and .NET on AWS.',
+    year: "2024",
+    title: "Founding Software Engineer, Ontime Payments",
+    description:
+      "Building payments infrastructure with serverless and .NET on AWS.",
   },
 ];
 
-const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue', 'React'];
+const techStack = [
+  "AWS",
+  "Serverless",
+  ".NET/C#",
+  "NoSQL",
+  "TypeScript",
+  "Vue",
+  "React",
+];
 ---
 
 <BaseLayout title="Ollie Church // Software Engineer">
   <!-- Hero -->
   <section class="mx-auto max-w-4xl px-4 pt-16 pb-12">
-    <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+    <div
+      class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between"
+    >
       <div>
-        <h1 class="text-4xl font-bold text-[var(--color-cyan)] sm:text-5xl">Ollie Church</h1>
-        <p class="mt-3 text-xl text-gray-300">Founding Software Engineer @ Ontime Payments</p>
-        <p class="mt-2 text-gray-400">Building payments infrastructure with serverless and .NET on AWS.</p>
+        <h1 class="text-4xl font-bold text-[var(--color-cyan)] sm:text-5xl">
+          Ollie Church
+        </h1>
+        <p class="mt-3 text-xl text-gray-300">
+          Founding Software Engineer @ Ontime Payments
+        </p>
+        <p class="mt-2 text-gray-400">
+          Building payments infrastructure with serverless and .NET on AWS.
+        </p>
       </div>
-      <img src="/ollie-profile.jpg" alt="Ollie Church" class="order-first md:order-last h-48 w-48 shrink-0 rounded-xl object-cover" />
+      <img
+        src="/ollie-profile.jpg"
+        alt="Ollie Church"
+        class="order-first md:order-last h-48 w-48 shrink-0 rounded-xl object-cover"
+      />
     </div>
   </section>
 
@@ -62,11 +94,13 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
   <section class="mx-auto max-w-4xl px-4 pb-12">
     <h2 class="font-mono text-lg text-gray-400">stack</h2>
     <div class="mt-4 flex flex-wrap gap-2">
-      {techStack.map((tech) => (
-        <span class="rounded-full border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] px-3 py-1 text-sm text-[var(--color-cyan)] transition-colors hover:border-[var(--color-purple)]">
-          {tech}
-        </span>
-      ))}
+      {
+        techStack.map((tech) => (
+          <span class="rounded-full border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] px-3 py-1 text-sm text-[var(--color-cyan)] transition-colors hover:border-[var(--color-purple)]">
+            {tech}
+          </span>
+        ))
+      }
     </div>
   </section>
 
@@ -84,38 +118,90 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
     <div class="mt-4 flex flex-col md:flex-row gap-4 md:gap-10">
       <!-- Description (mobile: first, desktop: right) -->
       <div class="flex flex-col justify-center gap-3 order-1 md:order-3">
-        <p class="font-mono text-xs text-[var(--color-purple-light)] uppercase tracking-wider">away from the keyboard</p>
-        <p class="text-sm leading-relaxed text-gray-400">
-          When I'm not writing code, you'll probably find me deep in a <em class="text-gray-200 not-italic font-medium">board game</em>, 
-          hunting for the next great <em class="text-gray-200 not-italic font-medium">escape room</em>,
-          planning the next <em class="text-gray-200 not-italic font-medium">trip abroad</em>, 
-          or losing hours to whatever <em class="text-gray-200 not-italic font-medium">video game</em> has its hooks in me. 
-          There's always <em class="text-gray-200 not-italic font-medium">music</em> on, 
-          and I drink far too much <em class="text-gray-200 not-italic font-medium">tea</em>.
+        <p
+          class="font-mono text-xs text-[var(--color-purple-light)] uppercase tracking-wider"
+        >
+          away from the keyboard
         </p>
-        <p class="text-xs text-gray-500 italic">Match three reels to find out more.</p>
+        <p class="text-sm leading-relaxed text-gray-400">
+          When I'm not writing code, you'll probably find me deep in a <em
+            class="text-gray-200 not-italic font-medium">board game</em
+          >, hunting for the next great <em
+            class="text-gray-200 not-italic font-medium">escape room</em
+          >, planning the next <em class="text-gray-200 not-italic font-medium"
+            >trip abroad</em
+          >, or losing hours to whatever <em
+            class="text-gray-200 not-italic font-medium">video game</em
+          > has its hooks in me. There's always <em
+            class="text-gray-200 not-italic font-medium">music</em
+          > on, and I drink far too much <em
+            class="text-gray-200 not-italic font-medium">tea</em
+          >.
+        </p>
+        <p class="text-xs text-gray-500 italic">
+          Match three reels to find out more.
+        </p>
       </div>
       <!-- Slot machine + fact (mobile: stacked below description, desktop: left column) -->
       <div class="flex flex-col gap-3 shrink-0 order-2 md:order-1">
         <!-- Fact display -->
-        <div id="fact-box" class="flex items-center gap-4 rounded-xl border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-4 md:w-0 md:min-w-full">
+        <div
+          id="fact-box"
+          class="flex items-center gap-4 rounded-xl border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] p-4 md:w-0 md:min-w-full"
+        >
           <span id="fact-emoji" class="text-4xl shrink-0">🎰</span>
           <div class="min-w-0">
-            <p id="fact-label" class="text-sm font-semibold text-[var(--color-cyan)]">No match yet</p>
-            <p id="fact-detail" class="mt-0.5 text-xs leading-relaxed text-gray-400 min-h-[2.4375rem]">Line up three of a kind to unlock a fact.</p>
+            <p
+              id="fact-label"
+              class="text-sm font-semibold text-[var(--color-cyan)]"
+            >
+              No match yet
+            </p>
+            <p
+              id="fact-detail"
+              class="mt-0.5 text-xs leading-relaxed text-gray-400 min-h-[2.4375rem]"
+            >
+              Line up three of a kind to unlock a fact.
+            </p>
           </div>
         </div>
         <!-- Reels + spin button -->
-        <div id="slot-row" class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-          <div class="flex gap-1.5 rounded-xl border border-[var(--color-purple)]/40 bg-[var(--color-bg-dark)] p-2 w-full sm:w-auto justify-center">
-            <div class="h-20 w-20 flex-1 sm:flex-none sm:h-24 sm:w-24 overflow-hidden rounded-lg bg-[var(--color-bg-dark-surface)]">
-              <div id="reel-0" class="text-5xl sm:text-6xl leading-[80px] sm:leading-[96px] text-center">🎮</div>
+        <div
+          id="slot-row"
+          class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3"
+        >
+          <div
+            class="flex gap-1.5 rounded-xl border border-[var(--color-purple)]/40 bg-[var(--color-bg-dark)] p-2 w-full sm:w-auto justify-center"
+          >
+            <div
+              class="h-20 w-20 flex-1 sm:flex-none sm:h-24 sm:w-24 overflow-hidden rounded-lg bg-[var(--color-bg-dark-surface)]"
+            >
+              <div
+                id="reel-0"
+                class="text-5xl sm:text-6xl leading-[80px] sm:leading-[96px] text-center"
+              >
+                🎮
+              </div>
             </div>
-            <div class="h-20 w-20 flex-1 sm:flex-none sm:h-24 sm:w-24 overflow-hidden rounded-lg bg-[var(--color-bg-dark-surface)]">
-              <div id="reel-1" class="text-5xl sm:text-6xl leading-[80px] sm:leading-[96px] text-center">🎲</div>
+            <div
+              class="h-20 w-20 flex-1 sm:flex-none sm:h-24 sm:w-24 overflow-hidden rounded-lg bg-[var(--color-bg-dark-surface)]"
+            >
+              <div
+                id="reel-1"
+                class="text-5xl sm:text-6xl leading-[80px] sm:leading-[96px] text-center"
+              >
+                🎲
+              </div>
             </div>
-            <div class="h-20 w-20 flex-1 sm:flex-none sm:h-24 sm:w-24 overflow-hidden rounded-lg bg-[var(--color-bg-dark-surface)]">
-              <div id="reel-2" class="text-5xl sm:text-6xl leading-[80px] sm:leading-[96px] text-center">☕</div>
+            <div
+              class="h-20 w-20 flex-1 sm:flex-none sm:h-24 sm:w-24 overflow-hidden rounded-lg bg-[var(--color-bg-dark-surface)]"
+            >
+              <div
+                id="reel-2"
+                class="text-5xl sm:text-6xl leading-[80px] sm:leading-[96px] text-center"
+              >
+                ☕
+              </div>
             </div>
           </div>
           <button
@@ -127,58 +213,148 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
         </div>
       </div>
     </div>
-    <canvas id="confetti-canvas" class="pointer-events-none fixed inset-0 z-50 h-full w-full" style="display:none;"></canvas>
+    <canvas
+      id="confetti-canvas"
+      class="pointer-events-none fixed inset-0 z-50 h-full w-full"
+      style="display:none;"></canvas>
   </section>
 
   <!-- Off Duty Script -->
   <script is:inline>
-    (function() {
+    (function () {
       var slots = [
-        { emoji: '🎮', facts: [
-          { label: 'Playing now', detail: 'Arc Raiders. You\'ll find me taking down Arc rather than other raiders. See you topside.' },
-          { label: 'Most played ever', detail: 'Factorio! Let me just sort out the copper plate bottleneck and then... oh god it\'s 3am!' }
-        ]},
-        { emoji: '🎲', facts: [
-          { label: 'Current favourite', detail: 'Quacks of Quedlinburg. Potion making try-your-luck deck builder with the chance to go BANG!' },
-          { label: 'Takes all day', detail: 'Mansions Of Madness. Lovecraftian, story-led, co-operative. You\'ll go insane or die trying.' }
-        ]},
-        { emoji: '✈️', facts: [
-          { label: 'Last trip', detail: 'Nepal. Temples, mountains and seeing a leopard in the wild.' },
-          { label: 'Next trip', detail: 'Italy. For the food, weather and history. A reliable favourite.' },
-          { label: 'Favourite trip', detail: 'Driving start to finish on Route 66 in an open-top Mustang.' },
-          { label: 'Memorable UK trip', detail: 'Climbing Yr Wyddfa. Luckily the clouds cleared when we got to the top.' }
-        ]},
-        { emoji: '☕', facts: [
-          { label: 'Fuel', detail: 'Tea. Always tea. Builder\'s strength, splash of milk, no sugar.' }
-        ]},
-        { emoji: '🔐', facts: [
-          { label: 'Favourite escape room', detail: 'Secret Subway by E-Exit in Budapest. Fun puzzles and a moving escape pod.' },
-          { label: 'Most impressive escape room set', detail: 'Pirate Bay by Mystique Room in Budapest. A 3 story pirate ship!'},
-          { label: 'Escape room win rate', detail: '96.8% success rate and going strong' },
-          { label: 'Rooms played', detail: '125 escape rooms across 6 countries and counting.' }
-        ]},
-        { emoji: '🎵', facts: [
-          { label: 'Coding playlist', detail: 'No lyrics. A lot of game soundtracks and cosy coffee shop jazz.' },
-          { label: 'Off-duty listening', detail: 'My library has everything from Paramore to Einaudi to Sondheim.' }
-        ]}
+        {
+          emoji: "🎮",
+          facts: [
+            {
+              label: "Playing now",
+              detail:
+                "Arc Raiders. You'll find me taking down Arc rather than other raiders. See you topside.",
+            },
+            {
+              label: "Most played ever",
+              detail:
+                "Factorio! Let me just sort out the copper plate bottleneck and then... oh god it's 3am!",
+            },
+          ],
+        },
+        {
+          emoji: "🎲",
+          facts: [
+            {
+              label: "Current favourite",
+              detail:
+                "Quacks of Quedlinburg. Potion making try-your-luck deck builder with the chance to go BANG!",
+            },
+            {
+              label: "Takes all day",
+              detail:
+                "Mansions Of Madness. Lovecraftian, story-led, co-operative. You'll go insane or die trying.",
+            },
+          ],
+        },
+        {
+          emoji: "✈️",
+          facts: [
+            {
+              label: "Last trip",
+              detail:
+                "Nepal. Temples, mountains and seeing a leopard in the wild.",
+            },
+            {
+              label: "Next trip",
+              detail:
+                "Italy. For the food, weather and history. A reliable favourite.",
+            },
+            {
+              label: "Favourite trip",
+              detail:
+                "Driving start to finish on Route 66 in an open-top Mustang.",
+            },
+            {
+              label: "Memorable UK trip",
+              detail:
+                "Climbing Yr Wyddfa. Luckily the clouds cleared when we got to the top.",
+            },
+          ],
+        },
+        {
+          emoji: "☕",
+          facts: [
+            {
+              label: "Fuel",
+              detail:
+                "Tea. Always tea. Builder's strength, splash of milk, no sugar.",
+            },
+          ],
+        },
+        {
+          emoji: "🔐",
+          facts: [
+            {
+              label: "Favourite escape room",
+              detail:
+                "Secret Subway by E-Exit in Budapest. Fun puzzles and a moving escape pod.",
+            },
+            {
+              label: "Most impressive escape room set",
+              detail:
+                "Pirate Bay by Mystique Room in Budapest. A 3 story pirate ship!",
+            },
+            {
+              label: "Escape room win rate",
+              detail: "96.8% success rate and going strong",
+            },
+            {
+              label: "Rooms played",
+              detail: "125 escape rooms across 6 countries and counting.",
+            },
+          ],
+        },
+        {
+          emoji: "🎵",
+          facts: [
+            {
+              label: "Coding playlist",
+              detail:
+                "No lyrics. A lot of game soundtracks and cosy coffee shop jazz.",
+            },
+            {
+              label: "Off-duty listening",
+              detail:
+                "My library has everything from Paramore to Einaudi to Sondheim.",
+            },
+          ],
+        },
       ];
-      var emojis = slots.map(function(s) { return s.emoji; });
+      var emojis = slots.map(function (s) {
+        return s.emoji;
+      });
 
-      function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+      function rand(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
 
       function initSlotMachine() {
-        var btn = document.getElementById('slot-spin');
+        var btn = document.getElementById("slot-spin");
         if (!btn) return;
 
-        var reels = [document.getElementById('reel-0'), document.getElementById('reel-1'), document.getElementById('reel-2')];
-        var factEmoji = document.getElementById('fact-emoji');
-        var factLabel = document.getElementById('fact-label');
-        var factDetail = document.getElementById('fact-detail');
-        var canvas = document.getElementById('confetti-canvas');
+        var reels = [
+          document.getElementById("reel-0"),
+          document.getElementById("reel-1"),
+          document.getElementById("reel-2"),
+        ];
+        var factEmoji = document.getElementById("fact-emoji");
+        var factLabel = document.getElementById("fact-label");
+        var factDetail = document.getElementById("fact-detail");
+        var canvas = document.getElementById("confetti-canvas");
 
         var nextIndex = {};
         var seen = {};
-        emojis.forEach(function(e) { nextIndex[e] = 0; seen[e] = false; });
+        emojis.forEach(function (e) {
+          nextIndex[e] = 0;
+          seen[e] = false;
+        });
 
         var spinning = false;
         var spinCount = 0;
@@ -186,8 +362,12 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
         var CELL = window.innerWidth >= 640 ? 96 : 80;
 
         function weightedPick() {
-          var weights = emojis.map(function(e) { return seen[e] ? 1 : 2; });
-          var total = weights.reduce(function(a, b) { return a + b; }, 0);
+          var weights = emojis.map(function (e) {
+            return seen[e] ? 1 : 2;
+          });
+          var total = weights.reduce(function (a, b) {
+            return a + b;
+          }, 0);
           var r = Math.random() * total;
           for (var i = 0; i < weights.length; i++) {
             r -= weights[i];
@@ -197,11 +377,17 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
         }
 
         function getNextFact(emoji) {
-          var slot = slots.find(function(s) { return s.emoji === emoji; });
+          var slot = slots.find(function (s) {
+            return s.emoji === emoji;
+          });
           if (!slot) return null;
           var idx = nextIndex[emoji] % slot.facts.length;
           nextIndex[emoji] = idx + 1;
-          return { emoji: emoji, label: slot.facts[idx].label, detail: slot.facts[idx].detail };
+          return {
+            emoji: emoji,
+            label: slot.facts[idx].label,
+            detail: slot.facts[idx].detail,
+          };
         }
 
         function spinReel(el, target, count, duration) {
@@ -209,33 +395,44 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
           for (var i = 0; i < count; i++) items.push(rand(emojis));
           items.push(target);
 
-          var html = '';
+          var html = "";
           for (var i = 0; i < items.length; i++) {
-            html += '<div style="height:' + CELL + 'px;line-height:' + CELL + 'px;">' + items[i] + '</div>';
+            html +=
+              '<div style="height:' +
+              CELL +
+              "px;line-height:" +
+              CELL +
+              'px;">' +
+              items[i] +
+              "</div>";
           }
           el.innerHTML = html;
 
           var dist = (items.length - 1) * CELL;
           return el.animate(
             [
-              { transform: 'translateY(0)' },
-              { transform: 'translateY(-' + dist + 'px)' }
+              { transform: "translateY(0)" },
+              { transform: "translateY(-" + dist + "px)" },
             ],
-            { duration: duration, easing: 'cubic-bezier(0.2, 0.6, 0.3, 1)', fill: 'forwards' }
+            {
+              duration: duration,
+              easing: "cubic-bezier(0.2, 0.6, 0.3, 1)",
+              fill: "forwards",
+            },
           ).finished;
         }
 
         function fireConfetti() {
-          var slotRow = document.getElementById('slot-row');
+          var slotRow = document.getElementById("slot-row");
           var rect = slotRow.getBoundingClientRect();
           var originX = rect.left + rect.width / 2;
           var originY = rect.top + rect.height / 2;
 
-          canvas.style.display = 'block';
+          canvas.style.display = "block";
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
-          var ctx = canvas.getContext('2d');
-          var colours = ['#6a2fb8', '#8b5cf6', '#38efdc', '#5ff5e6', '#fff'];
+          var ctx = canvas.getContext("2d");
+          var colours = ["#6a2fb8", "#8b5cf6", "#38efdc", "#5ff5e6", "#fff"];
           var particles = [];
           for (var i = 0; i < 50; i++) {
             particles.push({
@@ -245,7 +442,7 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
               vy: -Math.random() * 12 - 3,
               size: Math.random() * 6 + 2,
               colour: colours[Math.floor(Math.random() * colours.length)],
-              life: 1
+              life: 1,
             });
           }
           var frame = 0;
@@ -254,7 +451,10 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
             var alive = false;
             for (var i = 0; i < particles.length; i++) {
               var p = particles[i];
-              p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.life -= 0.018;
+              p.x += p.vx;
+              p.y += p.vy;
+              p.vy += 0.35;
+              p.life -= 0.018;
               if (p.life <= 0) continue;
               alive = true;
               ctx.globalAlpha = p.life;
@@ -263,11 +463,11 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
             }
             ctx.globalAlpha = 1;
             if (alive && ++frame < 100) requestAnimationFrame(draw);
-            else canvas.style.display = 'none';
+            else canvas.style.display = "none";
           })();
         }
 
-        btn.addEventListener('click', function() {
+        btn.addEventListener("click", function () {
           if (spinning) return;
           spinning = true;
           spinCount++;
@@ -285,7 +485,9 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
             var pick = weightedPick();
             t0 = t1 = t2 = emojis[pick];
           } else {
-            t0 = rand(emojis); t1 = rand(emojis); t2 = rand(emojis);
+            t0 = rand(emojis);
+            t1 = rand(emojis);
+            t2 = rand(emojis);
             while (t0 === t1 && t1 === t2) t2 = rand(emojis);
           }
 
@@ -293,26 +495,29 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
           var p1 = spinReel(reels[1], t1, 14, 550);
           var p2 = spinReel(reels[2], t2, 18, 700);
 
-          Promise.all([p0, p1, p2]).then(function() {
-            if (t0 === t1 && t1 === t2) {
-              var fact = getNextFact(t0);
-              if (fact) {
-                hasWon = true;
-                seen[t0] = true;
-                factEmoji.textContent = fact.emoji;
-                factLabel.textContent = fact.label;
-                factDetail.textContent = fact.detail;
-                fireConfetti();
+          Promise.all([p0, p1, p2])
+            .then(function () {
+              if (t0 === t1 && t1 === t2) {
+                var fact = getNextFact(t0);
+                if (fact) {
+                  hasWon = true;
+                  seen[t0] = true;
+                  factEmoji.textContent = fact.emoji;
+                  factLabel.textContent = fact.label;
+                  factDetail.textContent = fact.detail;
+                  fireConfetti();
+                }
               }
-            }
-          }).catch(function() {}).finally(function() {
-            spinning = false;
-          });
+            })
+            .catch(function () {})
+            .finally(function () {
+              spinning = false;
+            });
         });
       }
 
       initSlotMachine();
-      document.addEventListener('astro:after-swap', initSlotMachine);
+      document.addEventListener("astro:after-swap", initSlotMachine);
     })();
   </script>
 
@@ -320,17 +525,24 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
   <section class="mx-auto max-w-4xl px-4 pb-12">
     <h2 class="font-mono text-lg text-gray-400">latest_posts</h2>
     <div class="mt-6 grid gap-4">
-      {latestPosts.map((post) => (
-        <PostCard
-          title={post.data.title}
-          date={post.data.date}
-          description={post.data.description}
-          tags={post.data.tags}
-          slug={post.id}
-          readingTime={getReadingTime(post.body)}
-          image={post.data.image}
-        />
-      ))}
+      {
+        latestPosts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            date={post.data.date}
+            description={post.data.description}
+            tags={post.data.tags}
+            slug={post.id}
+            readingTime={getReadingTime(post.body)}
+            image={post.data.image}
+            commentCount={
+              post.data.devtoUrl
+                ? commentCounts.get(post.data.devtoUrl)
+                : undefined
+            }
+          />
+        ))
+      }
     </div>
   </section>
 
@@ -338,9 +550,31 @@ const techStack = ['AWS', 'Serverless', '.NET/C#', 'NoSQL', 'TypeScript', 'Vue',
   <section class="mx-auto max-w-4xl px-4 pb-16">
     <h2 class="font-mono text-lg text-gray-400">links</h2>
     <ul class="mt-4 space-y-2 font-mono text-sm text-gray-300">
-      <li>→ <a href="https://linkedin.com/in/olliechurch" target="_blank" rel="noopener noreferrer" class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]">LinkedIn</a></li>
-      <li>→ <a href="https://github.com/olliechurch" target="_blank" rel="noopener noreferrer" class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]">GitHub</a></li>
-      <li>→ <a href="mailto:olliemchurch@gmail.com" class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]">olliemchurch@gmail.com</a></li>
+      <li>
+        → <a
+          href="https://linkedin.com/in/olliechurch"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]"
+          >LinkedIn</a
+        >
+      </li>
+      <li>
+        → <a
+          href="https://github.com/olliechurch"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]"
+          >GitHub</a
+        >
+      </li>
+      <li>
+        → <a
+          href="mailto:olliemchurch@gmail.com"
+          class="text-[var(--color-purple-light)] hover:text-[var(--color-cyan)]"
+          >olliemchurch@gmail.com</a
+        >
+      </li>
     </ul>
   </section>
   <!-- Endnote -->
