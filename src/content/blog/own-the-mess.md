@@ -5,6 +5,7 @@ description: "From a talk I gave to people working towards their first software 
 tags: ["career", "beginners", "process", "architecture"]
 image: "https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/rz1gw4zc32fmrzuodw95.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/own-the-mess-you-didnt-make-1pbm"
 ---
 
 There's no shortage of advice on landing your first software engineering role. Portfolios, interviews, which languages to learn. What I found far less of, when I was starting out, was anything on what to do once you're actually in the building. So when The Tech Academy asked me to [give a talk](https://youtu.be/mdgi9BGlIO8) at the end of July, mostly to students and people lining up their first role, that's what I talked about.
