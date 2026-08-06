@@ -2,7 +2,7 @@
 title: "Own the mess you didn't make"
 date: 2026-08-04
 description: "From a talk I gave to people working towards their first software engineering role: the things about live, inherited systems that no course prepares you for."
-tags: ["career", "beginners", "process", "architecture"]
+tags: ["career", "beginners", "learning", "tech_academy"]
 image: "https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/rz1gw4zc32fmrzuodw95.png"
 published: true
 devtoUrl: "https://dev.to/olliechurch/own-the-mess-you-didnt-make-1pbm"
