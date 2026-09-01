@@ -78,5 +78,5 @@ I'm not immune, but I work on noticing the signs early, which is cheaper than re
 ## References
 
 - Epictetus, [*The Enchiridion*](https://www.gutenberg.org/ebooks/45109). The source of the dichotomy of control: what is up to us, what isn't, and why confusing the two is where the distress comes from.
-- Derren Brown, [*Happy: Why More or Less Everything is Absolutely Fine*](https://www.penguin.co.uk/books/181292/happy-by-brown-derren/9780552172363). A case against the positive thinking industry, using Stoicism as the alternative.
+- Derren Brown, [*Happy: Why More or Less Everything is Absolutely Fine*](https://www.penguin.co.uk/books/432091/happy-by-derren-brown/9780552172356). A case against the positive thinking industry, using Stoicism as the alternative.
 - ["When the fun stops, stop"](https://bettingandgamingcouncil.com/news/bgc-launches-new-take-time-to-think-campaign) ran as the UK gambling industry's safer gambling message from 2015 until it was retired in October 2021.
