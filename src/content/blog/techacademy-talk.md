@@ -1,7 +1,7 @@
 ---
 title: "I gave a talk for the Tech Academy"
 date: 2026-07-31
-description: "I was asked to give a talk for the Tech Academy for aspiring and new Junior Developers. I chose to talk about what comes next after getting the job and the lessons I learnt"
+description: "I was asked to give a talk for the Tech Academy to aspiring and new Junior Developers. I chose to talk about what comes next after getting the job and the lessons I learnt"
 tags: ["career", "tech_academy", "learning", "webdev"]
 image: "https://www.eventbrite.com/e/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1187963507%252F1943491037183%252F1%252Foriginal.20260630-225707%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D1880%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.5%26fp-y%3D0.5%26s%3D2a43f89f3b9792709404b4b2a72f5854&w=1880&q=75"
 published: true
