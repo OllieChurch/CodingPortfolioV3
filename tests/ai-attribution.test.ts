@@ -1,8 +1,7 @@
 // Feature: portfolio-v3, Property 5: AI attribution on every post
 import { describe, it, expect } from 'vitest';
-import * as fc from 'fast-check';
-import { AI_ATTRIBUTION, appendAttribution } from '../src/data/posts';
-import { readFileSync, readdirSync } from 'fs';
+import { AI_ATTRIBUTION } from '../src/data/posts';
+import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 
 /**
@@ -11,31 +10,28 @@ import { join } from 'path';
  * Property 5: AI attribution on every post
  * For any blog post, the rendered output contains "Human written, AI assisted."
  *
- * Since we can't render Astro pages in Vitest, we test two things:
- * 1. The appendAttribution helper always includes the attribution for any content.
- * 2. Every actual blog markdown file contains the attribution text.
+ * The attribution lives in the shared blog post template, not in the markdown
+ * files — so the template is what makes the property true for every post.
+ * Vitest can't render Astro, so we check the template emits the attribution and
+ * that a single catch-all route renders every post.
  */
 
+const blogPages = join(__dirname, '..', 'src', 'pages', 'blog');
+const POST_TEMPLATE = '[...slug].astro';
+
 describe('AI attribution on every post (Property 5)', () => {
-    it('appendAttribution always includes the attribution string for any content', () => {
-        fc.assert(
-            fc.property(fc.string({ minLength: 0, maxLength: 500 }), (content) => {
-                const result = appendAttribution(content);
-                expect(result).toContain(AI_ATTRIBUTION);
-            }),
-            { numRuns: 100 },
-        );
+    it('the shared blog post template renders the attribution', () => {
+        const template = readFileSync(join(blogPages, POST_TEMPLATE), 'utf-8');
+        expect(template).toContain(AI_ATTRIBUTION);
     });
 
-    it('every blog markdown file contains the AI attribution text', () => {
-        const blogDir = join(__dirname, '..', 'src', 'content', 'blog');
-        const files = readdirSync(blogDir).filter((f) => f.endsWith('.md'));
+    it('that template is the only route rendering posts, so every post gets it', () => {
+        const postRoutes = readdirSync(blogPages)
+            .filter((f) => f.endsWith('.astro') && f !== 'index.astro');
+        expect(postRoutes).toEqual([POST_TEMPLATE]);
 
-        expect(files.length).toBeGreaterThan(0);
-
-        for (const file of files) {
-            const content = readFileSync(join(blogDir, file), 'utf-8');
-            expect(content).toContain(AI_ATTRIBUTION);
-        }
+        const posts = readdirSync(join(__dirname, '..', 'src', 'content', 'blog'))
+            .filter((f) => f.endsWith('.md'));
+        expect(posts.length).toBeGreaterThan(0);
     });
 });

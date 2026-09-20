@@ -45,13 +45,8 @@ export function getFrontmatterDisplayFields(fm: BlogFrontmatter): string[] {
     ];
 }
 
-/** The AI attribution text appended to every blog post. */
+/** The AI attribution text rendered on every blog post by the post template. */
 export const AI_ATTRIBUTION = 'Human written, AI assisted.';
-
-/** Append the AI attribution to blog post content. */
-export function appendAttribution(content: string): string {
-    return `${content}\n\n${AI_ATTRIBUTION}`;
-}
 
 /** Check whether a blog post body contains a references section. */
 export function hasReferencesSection(body: string | undefined | null): boolean {
