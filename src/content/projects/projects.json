@@ -27,7 +27,7 @@
     },
     {
         "title": "Task Glitch",
-        "description": "Intelligent task scheduling that scores your backlog and builds you an optimised work session — automatically.",
+        "description": "Intelligent task scheduling that scores your backlog and builds you an optimised work session automatically.",
         "techTags": [
             "Vue",
             "Tailwind",

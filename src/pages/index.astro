@@ -106,7 +106,12 @@ const techStack = [
 
   <!-- Career Timeline -->
   <section class="mx-auto max-w-4xl px-4 pb-12">
-    <h2 class="font-mono text-lg text-gray-400">career</h2>
+    <div class="flex items-baseline justify-between gap-3">
+      <h2 class="font-mono text-lg text-gray-400">career</h2>
+      <a href="/work" class="font-mono text-sm text-[var(--color-cyan)] hover:underline md:hidden">
+        see more →
+      </a>
+    </div>
     <div class="mt-6">
       <Timeline entries={timelineEntries} />
     </div>
@@ -227,12 +232,22 @@ const techStack = [
           emoji: "🎮",
           facts: [
             {
-              label: "Playing now",
+              label: "Reliable Favourites",
               detail:
-                "Arc Raiders. You'll find me taking down Arc rather than other raiders. See you topside.",
+                "Age Of Empires IV, Company Of Heroes 2, Valheim, Wildlands, Arc Raiders"
             },
             {
-              label: "Most played ever",
+              label: "Platform",
+              detail:
+                "I spent a long time as a console gamer, but now I mostly play on PC."
+            },
+            {
+              label: "Playing Now",
+              detail:
+                "Distributrains... which is as boring as it sounds to most \"normal\" people.",
+            },
+            {
+              label: "Most played",
               detail:
                 "Factorio! Let me just sort out the copper plate bottleneck and then... oh god it's 3am!",
             },
@@ -250,6 +265,11 @@ const techStack = [
               label: "Takes all day",
               detail:
                 "Mansions Of Madness. Lovecraftian, story-led, co-operative. You'll go insane or die trying.",
+            },
+            {
+              label: "Best 2 player",
+              detail:
+                "7 Wonders Duel. Multiple strategies. Forced to play what you've got rather than repeating each time",
             },
           ],
         },
@@ -523,7 +543,12 @@ const techStack = [
 
   <!-- Latest Posts -->
   <section class="mx-auto max-w-4xl px-4 pb-12">
-    <h2 class="font-mono text-lg text-gray-400">latest_posts</h2>
+    <div class="flex items-baseline justify-between gap-3">
+      <h2 class="font-mono text-lg text-gray-400">latest_posts</h2>
+      <a href="/blog" class="font-mono text-sm text-[var(--color-cyan)] hover:underline md:hidden">
+        see more →
+      </a>
+    </div>
     <div class="mt-6 grid gap-4">
       {
         latestPosts.map((post) => (

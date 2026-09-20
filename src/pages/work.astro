@@ -3,14 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import projects from '../content/projects/projects.json';
 
 const side = projects.filter((p) => p.category === 'side');
+
+const sections = [
+  { id: 'professional_experience', preview: 'Ontime Payments · Salary Finance' },
+  { id: 'contract_work', preview: 'Legal services firm' },
+  { id: 'side_projects', preview: `${side.length} builds` },
+];
 ---
 
 <BaseLayout title="Work // Ollie" description="Professional experience and side projects by Ollie Church — software engineer specialising in serverless architecture and event-driven systems.">
   <section class="mx-auto max-w-4xl px-4 py-12">
     <h1 class="text-2xl font-bold text-[var(--color-cyan)] sm:text-3xl">work</h1>
 
+    <!-- Section index -->
+    <nav aria-label="Page sections" class="mt-4 font-mono text-sm">
+      <ul class="space-y-1.5">
+        {sections.map((section, i) => (
+          <li class="flex flex-wrap items-baseline gap-x-2">
+            <span class="text-gray-600 select-none" aria-hidden="true">{i === sections.length - 1 ? "└─" : "├─"}</span>
+            <a href={`#${section.id}`} class="text-[var(--color-cyan)] hover:underline">{section.id}</a>
+            <span class="text-xs text-gray-500">{section.preview}</span>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
     <!-- Professional Experience -->
-    <h2 class="mt-10 font-mono text-lg text-gray-400">professional_experience</h2>
+    <h2 id="professional_experience" class="mt-10 scroll-mt-24 font-mono text-lg text-gray-400">professional_experience</h2>
     
     <!-- Ontime Payments -->
     <article class="mt-6 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] overflow-hidden">
@@ -136,8 +155,66 @@ const side = projects.filter((p) => p.category === 'side');
       </div>
     </article>
 
+    <!-- Contract Work -->
+    <h2 id="contract_work" class="mt-16 scroll-mt-24 font-mono text-lg text-gray-400">contract_work</h2>
+    <p class="mt-2 text-sm text-gray-500">Focussed work package engagements alongside full-time work.</p>
+
+    <!-- Legal services firm (contract) -->
+    <article class="mt-6 rounded-lg border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark-surface)] overflow-hidden">
+      <div class="p-6">
+        <div class="flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h3 class="text-xl font-semibold text-white">Legal services firm <span class="text-base font-normal text-gray-500">(via consultancy engagement)</span></h3>
+            <p class="mt-1 text-sm text-[var(--color-cyan)]">Software Engineer (contract)</p>
+          </div>
+          <span class="font-mono text-sm text-[var(--color-purple-light)]">June 2026-Sep 2026</span>
+        </div>
+        <p class="mt-3 text-gray-300 text-sm">
+          A firm with no in-house technical team and no prior custom software. Engaged as sole developer to take a consultant's product concept and build it into working tools as part of a broader platform vision.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {['TypeScript', 'Vue', 'Google Cloud', 'LLMs', 'WhatsApp'].map((tag) => (
+            <span class="rounded bg-[var(--color-purple)]/20 border border-[var(--color-purple)]/30 px-2 py-0.5 text-xs text-[var(--color-purple-light)] font-mono">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="border-t border-[var(--color-bg-dark-card)]">
+        <div class="p-6 pt-5">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Self-Serve Contract Generation</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Clients message over WhatsApp or email</li>
+                <li>• System reads the free text and assembles the contract</li>
+                <li>• No forms, no portal, no staff in the loop</li>
+              </ul>
+            </div>
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Template Compiler</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Turns lawyer-authored templates into machine-readable ones</li>
+                <li>• Assembly logic arrives as prose written for a human to follow</li>
+                <li>• Admin portal for managing templates</li>
+              </ul>
+            </div>
+            <div class="rounded border border-[var(--color-bg-dark-card)] bg-[var(--color-bg-dark)]/50 p-4 sm:col-span-2">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Where AI Sits</p>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Used narrowly and deliberately to interpret client intent</li>
+                <li>• Everything that has to be right every time is deterministic code</li>
+                <li>• AI proposes how to read and assemble a template; the legal copy stays untouched</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
     <!-- Side Projects -->
-    <h2 class="mt-16 font-mono text-lg text-gray-400">side_projects</h2>
+    <h2 id="side_projects" class="mt-16 scroll-mt-24 font-mono text-lg text-gray-400">side_projects</h2>
     <p class="mt-2 text-sm text-gray-500">Curiosity projects, experiments, and portfolio work for others.</p>
     <div id="side-projects-grid" class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {side.map((project) => (

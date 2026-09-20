@@ -3,17 +3,22 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import netlify from '@astrojs/netlify';
+import node from '@astrojs/node';
 
-// The adapter is only needed to build/deploy on-demand routes. During
-// `astro dev`, Astro's dev server renders them directly, so we skip the
-// adapter locally to avoid Netlify's dev emulation downloading and running
-// Deno (which fails with EBUSY on some Windows setups, e.g. antivirus locks).
+// An adapter is always required: the on-demand blog post route and the deferred
+// comments island both need one, including under `astro dev`.
+//
+// Locally we use the Node adapter instead of Netlify's. The Netlify adapter
+// emulates Edge Functions in dev, which downloads and runs Deno — that fails
+// with EBUSY on some Windows setups (antivirus locking the freshly written
+// deno.exe), and the emulation buys us nothing here. Netlify is still the
+// adapter for every real build and deploy.
 const isDev = process.argv.includes('dev');
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://olliechurch.co.uk',
-  adapter: isDev ? undefined : netlify(),
+  adapter: isDev ? node({ mode: 'standalone' }) : netlify(),
   vite: {
     plugins: [tailwindcss()]
   }

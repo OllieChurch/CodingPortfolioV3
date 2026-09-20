@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Comments from "../../components/Comments.astro";
+import CommentsSkeleton from "../../components/CommentsSkeleton.astro";
 import { getReadingTime } from "../../data/readingTime";
 
 // Rendered on demand so each visit shows the post's current Dev.to comments.
@@ -91,7 +92,13 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("en-GB", {
       </button>
     </div>
 
-    <Comments devtoUrl={post.data.devtoUrl} />
+    {
+      post.data.devtoUrl && (
+        <Comments server:defer devtoUrl={post.data.devtoUrl}>
+          <CommentsSkeleton slot="fallback" />
+        </Comments>
+      )
+    }
 
     <script is:inline>
       (function () {

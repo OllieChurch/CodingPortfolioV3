@@ -1,0 +1,28 @@
+---
+// Placeholder shown while the deferred Comments island loads. Mirrors the real
+// section's layout so the page doesn't jump when the comments arrive.
+---
+
+<section class="mt-12 border-t border-[var(--color-bg-dark-card)] pt-8">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <h2 class="text-xl font-bold">Comments</h2>
+    <div class="h-9 w-56 animate-pulse rounded-lg bg-[var(--color-bg-dark-card)]"></div>
+  </div>
+
+  <div class="mt-8 space-y-8" aria-hidden="true">
+    {[0, 1].map(() => (
+      <div class="animate-pulse">
+        <div class="flex items-center gap-2.5">
+          <div class="h-8 w-8 shrink-0 rounded-full bg-[var(--color-bg-dark-card)]" />
+          <div class="h-3 w-32 rounded bg-[var(--color-bg-dark-card)]" />
+        </div>
+        <div class="mt-3 space-y-2">
+          <div class="h-3 w-full rounded bg-[var(--color-bg-dark-card)]" />
+          <div class="h-3 w-4/5 rounded bg-[var(--color-bg-dark-card)]" />
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <p class="sr-only" role="status">Loading comments…</p>
+</section>
