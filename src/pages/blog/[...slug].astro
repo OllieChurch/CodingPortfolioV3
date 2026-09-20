@@ -5,17 +5,17 @@ import Comments from "../../components/Comments.astro";
 import CommentsSkeleton from "../../components/CommentsSkeleton.astro";
 import { getReadingTime } from "../../data/readingTime";
 
-// Rendered on demand so each visit shows the post's current Dev.to comments.
-// Every other route stays statically prerendered.
-export const prerender = false;
-
-const { slug } = Astro.params;
-const posts = await getCollection("blog");
-const post = posts.find((p) => p.id.toLowerCase() === slug?.toLowerCase());
-
-if (!post) {
-  return Astro.redirect("/404");
+// Prerendered: nothing here needs a server. The comments are a deferred
+// island, so they still load live on each visit without holding up the page.
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id.toLowerCase() },
+    props: { post },
+  }));
 }
+
+const { post } = Astro.props;
 
 const { Content } = await render(post);
 const readingTime = getReadingTime(post.body);
