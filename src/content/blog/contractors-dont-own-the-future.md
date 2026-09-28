@@ -5,6 +5,7 @@ description: "Four work packages, one happy client, and a four-day overrun I sho
 tags: ["career", "contracting", "ai", "discuss"]
 image: "https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/g96acfugdenpkgna1t5b.png"
 published: true
+devtoUrl: "https://dev.to/olliechurch/contractors-dont-own-the-future-3i1i"
 ---
 
 Most of my career has been spent in-house, on teams that stay with a system long after it ships. I've written a fair bit about ownership from that position in some of my other articles, such as [owning the mess you didn't make](https://olliechurch.co.uk/blog/own-the-mess/) and [owning the code AI writes for you](https://olliechurch.co.uk/blog/ai-took-me-somewhere-new/).
