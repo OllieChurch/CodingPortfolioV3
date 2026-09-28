@@ -8,9 +8,9 @@ import projects from '../content/projects/projects.json';
 const side = projects.filter((p) => p.category === 'side');
 
 const sections = [
-  { id: 'professional_experience', preview: 'Ontime Payments · Salary Finance' },
-  { id: 'contract_work', preview: 'Legal services firm' },
-  { id: 'side_projects', preview: `${side.length} builds` },
+  { id: 'professional_experience' },
+  { id: 'contract_work' },
+  { id: 'side_projects' },
 ];
 ---
 
@@ -25,7 +25,6 @@ const sections = [
           <li class="flex flex-wrap items-baseline gap-x-2">
             <span class="text-gray-600 select-none" aria-hidden="true">{i === sections.length - 1 ? "└─" : "├─"}</span>
             <a href={`#${section.id}`} class="text-[var(--color-cyan)] hover:underline">{section.id}</a>
-            <span class="text-xs text-gray-500">{section.preview}</span>
           </li>
         ))}
       </ul>
